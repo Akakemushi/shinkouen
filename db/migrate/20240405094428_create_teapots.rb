@@ -10,6 +10,7 @@ class CreateTeapots < ActiveRecord::Migration[7.1]
       t.text :comment
       t.integer :price, null: false
       t.string :type, null: false
+      t.string :shape, null: false
       t.string :maker, null: false
       t.boolean :in_stock, null: false, default: true
       t.timestamps
