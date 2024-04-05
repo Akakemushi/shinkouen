@@ -1,0 +1,2 @@
+class Teapot < ApplicationRecord
+end
