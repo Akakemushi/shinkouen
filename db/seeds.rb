@@ -6,11 +6,6 @@ models.each do |model|
   model.destroy_all
 end
 
-height
-width
-depth
-weight
-ccs
 comment = [
   "I recommend this teapot for green tea.",
   "This teapot was made by a national treasure artisan.",
@@ -23,8 +18,25 @@ comment = [
   "I'm out of ideas for writing stuff about tea, so I'm writing this.",
   "Who lives in a pineapple under the sea?"
 ]
-price = {30..5000}*100
-type = %w[Banko-yaki Tokoname-yaki Kutani-yaki Arita-yaki Hagi-yaki Mashiko-yaki Karatsu-yaki]
+kilntype = %w[Banko-yaki Tokoname-yaki Kutani-yaki Arita-yaki Hagi-yaki Mashiko-yaki Karatsu-yaki]
 shape = %w[Yokode Uwade Ushirode Houbin Shiboridashi]
 maker = ["Yuutarou Yamada", "Yoshiki Murata", "Fujita Tokuta", "Yutaka Tsuzuki", "Hiroshi Koie", "Koushi Umehara", "Junzo Maekawa", "Seiho Tsuzuki", "Murakoshi Fuugetsu"]
-in_stock
+
+
+50.times do
+  teapot = Teapot.new
+  teapot.price = rand(30..5000)*100
+  teapot.kilntype = kilntype[rand(7)]
+  teapot.shape = shape[rand(5)]
+  teapot.maker = maker[rand(9)]
+  teapot.comment = comment[rand(10)]
+  teapot.height = rand(70..160)/10.to_f
+  teapot.width = rand(100..200)/10.to_f
+  teapot.depth = rand(100..200)/10.to_f
+  teapot.weight = rand(150..500)
+  teapot.ccs = rand(150..600)
+  teapot.in_stock = true
+  if teapot.save!
+    puts "Teapot created"
+  end
+end
