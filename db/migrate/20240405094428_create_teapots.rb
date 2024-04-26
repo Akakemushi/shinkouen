@@ -1,10 +1,10 @@
 class CreateTeapots < ActiveRecord::Migration[7.1]
   def change
     create_table :teapots do |t|
-      t.float :height
-      t.float :width
-      t.float :depth
-      t.float :weight
+      t.integer :height
+      t.integer :width
+      t.integer :depth
+      t.integer :weight
       t.integer :ccs
       t.text :comment
       t.integer :price, null: false
