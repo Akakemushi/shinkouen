@@ -1,0 +1,2 @@
+module TeapotsHelper
+end

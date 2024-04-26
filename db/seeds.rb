@@ -36,6 +36,7 @@ maker = ["Yuutarou Yamada", "Yoshiki Murata", "Fujita Tokuta", "Yutaka Tsuzuki",
   teapot.weight = rand(150..500)
   teapot.ccs = rand(150..600)
   teapot.in_stock = true
+  teapot.views = rand(100)
   if teapot.save!
     puts "Teapot created"
   end

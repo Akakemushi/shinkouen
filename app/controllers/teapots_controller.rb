@@ -1,0 +1,2 @@
+class TeapotsController < ApplicationController
+end
