@@ -1,0 +1,35 @@
+<h1>Welcome to Shinkouen</h1>
+<section>
+  <div class="container">
+    <div class="carousel">
+      <input type="radio" name="slides" checked="checked" id="slide-1">
+      <input type="radio" name="slides" id="slide-2">
+      <input type="radio" name="slides" id="slide-3">
+      <input type="radio" name="slides" id="slide-4">
+      <input type="radio" name="slides" id="slide-5">
+      <input type="radio" name="slides" id="slide-6">
+      <ul class="carousel__slides">
+      <% @most_popular.each do |teapot| %>
+        <li class="carousel__slide">
+          <figure>
+            <div>
+              <img src="https://picsum.photos/id/1041/800/450" alt="">
+            </div>
+            <figcaption>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              <span class="credit">Photo: Tim Marshall</span>
+            </figcaption>
+          </figure>
+        </li>
+        <% end %>
+      </ul>
+      <ul class="carousel__thumbnails">
+        <% @most_popular.each_with_index do |teapot, index| %>
+          <li>
+            <label for="slide-<%= index + 1 %>"><img src="https://picsum.photos/id/1041/150/150" alt=""></label>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</section>

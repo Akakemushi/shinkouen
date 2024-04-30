@@ -1,6 +1,18 @@
 class TeapotsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
+   def index
+    @teapots = Teapot.all
+    @most_popular = @teapots.sort_by { |teapot| teapot.views }.reverse.take(6)
+    if params[:q].present?
+      @teapots = Teapot.search(params[:q])
+    end
+  end
+
+  def show
+    @teapot = Teapot.find(params[:id])
+  end
+
   def new
     @teapot = Teapot.new
     authorize @teapot
@@ -9,7 +21,6 @@ class TeapotsController < ApplicationController
   def create
     @teapot = Teapot.new(teapot_params)
     authorize @teapot
-    # ...
   end
 
   def edit
@@ -20,12 +31,10 @@ class TeapotsController < ApplicationController
   def update
     @teapot = Teapot.find(params[:id])
     authorize @teapot
-    # ...
   end
 
   def destroy
     @teapot = Teapot.find(params[:id])
     authorize @teapot
-    # ...
   end
 end
