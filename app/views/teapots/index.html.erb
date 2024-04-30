@@ -13,11 +13,14 @@
         <li class="carousel__slide">
           <figure>
             <div>
-              <img src="https://picsum.photos/id/1041/800/450" alt="">
+              <%# <img src="https://picsum.photos/id/1041/800/450" alt=""> %>
+              <% if teapot.images.attached? %>
+                <%= cl_image_tag(teapot.images.first.key, width: 300, height: 300, crop: :fill) %>
+              <% end %>
             </div>
             <figcaption>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              <span class="credit">Photo: Tim Marshall</span>
+              <%= teapot.comment %>
+              <span class="maker">Artist: <%= teapot.maker %></span>
             </figcaption>
           </figure>
         </li>
@@ -26,7 +29,7 @@
       <ul class="carousel__thumbnails">
         <% @most_popular.each_with_index do |teapot, index| %>
           <li>
-            <label for="slide-<%= index + 1 %>"><img src="https://picsum.photos/id/1041/150/150" alt=""></label>
+            <label for="slide-<%= index + 1 %>"><%= cl_image_tag(teapot.images.first.key, width: 150, height: 150, crop: :fill) %></label>
           </li>
         <% end %>
       </ul>
