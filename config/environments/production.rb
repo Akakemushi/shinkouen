@@ -27,7 +27,7 @@ Rails.application.configure do
   # config.assets.css_compressor = :sass
 
   # Do not fall back to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
+  config.assets.compile = true
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = "http://assets.example.com"
@@ -74,7 +74,7 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   #NOTE TO JD----  NOTE TO JD---  NOTE TO JD---
-  
+
   # Uncommend the following line and replace the url with the relevant url once the site goes live
   #config.action_mailer.default_url_options = { host: 'www.yourwebsite.com' }
 

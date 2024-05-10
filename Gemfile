@@ -48,6 +48,8 @@ gem "font-awesome-sass", "~> 6.1"
 gem "devise"
 gem "pundit"
 gem "dotenv-rails"
+gem "pagy"
+gem "webpacker"
 
 
 

@@ -1,12 +1,15 @@
 class TeapotsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
-   def index
-    @teapots = Teapot.all
-    @most_popular = @teapots.sort_by { |teapot| teapot.views }.reverse.take(6)
+  def index
+    teapots = Teapot.all
+    @most_popular = teapots.sort_by { |teapot| teapot.views }.reverse.take(6)
+
     if params[:q].present?
-      @teapots = Teapot.search(params[:q])
+      teapots = Teapot.search(params[:q])
     end
+
+    @pagy, @teapots = pagy(teapots, items: 10)
   end
 
   def show

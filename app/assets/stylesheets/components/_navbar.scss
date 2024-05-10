@@ -1,0 +1,55 @@
+.navbar {
+  display: flex;
+  height: 150px;
+  width: 100%;
+  background-color: $off-dark;
+  align-items: center;
+  border-bottom-width: 5px;
+  border-bottom-color: $light;
+  border-bottom-style: solid;
+
+  img {
+    height: 100%;
+    width: auto;
+  }
+
+  .store-name-container {
+    padding-left: 2%;
+
+    h1 {
+    font-size: 3.4em;
+    font-weight: 400;
+    margin-bottom: -7px;
+    text-align: center;
+    }
+
+    h3 {
+      font-family: $headers-font;
+      font-weight: 400;
+      font-size: 2.42em;
+      margin-top: 0;
+    }
+  }
+
+  .horizontal-spacer {
+    flex-grow: 1;
+  }
+
+  .navbar-button-container {
+    align-items: center;
+
+
+    .nav-list {
+      display: flex;
+      align-items: center;
+      list-style-type: none;
+
+      .nav-item {
+        color: $light;
+        font-size: 1.5em;
+        padding-right: 35px;
+        font-family: $body-font;
+      }
+    }
+  }
+}

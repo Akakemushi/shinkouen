@@ -1,0 +1,16 @@
+Notes for the Shinkoen Website and general learning from the experience.
+
+Models recommended for setting up an online shop are:
+1. the product model (teapot)
+2. the cart model (temporary storage for items, does not get saved in db)
+3. the order model (just like cart model, but only created once checkout is confirmed, saved in db, joins a user to a group of line items)
+4. the "Line Item" model (join table for items and orders, saved in db)
+5. the category model (maybe optional? used to organize items better somehow...come back later)
+6. the user model (self explanatory, but can include an "annoymous" function to handle those without accounts)
+7. the review model (self explanatory)
+
+Pagy Installation
+first you need the gem, then you need to follow some installation steps (which I forgot)
+right now I'm troubleshooting...
+First you need to include the line "include Pagy::Frontend" in the relevant "helper" module.
+also, I seem to require two files, pagy.js and pagy.css, which I had to manually create inside the app/javascript  and app/assets/stylesheets folders respectively... the files are blank, but that's ok I guess?
