@@ -14,3 +14,6 @@ first you need the gem, then you need to follow some installation steps (which I
 right now I'm troubleshooting...
 First you need to include the line "include Pagy::Frontend" in the relevant "helper" module.
 also, I seem to require two files, pagy.js and pagy.css, which I had to manually create inside the app/javascript  and app/assets/stylesheets folders respectively... the files are blank, but that's ok I guess?
+
+picture filename are CaSe SenSiTive!  Even the .suffix!  .PNG does NOT equal .PNG
+

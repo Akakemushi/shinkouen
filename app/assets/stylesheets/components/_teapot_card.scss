@@ -1,0 +1,27 @@
+.teapot-card {
+  background-color: white;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 7px white;
+  display: flex;
+  gap: 5px;
+
+  .card-info-container {
+    .dimension-box {
+
+      img {
+        max-width: 150px;
+        height: auto;
+      }
+      p {
+        color: green;
+      }
+    }
+
+    .capacity-box {
+      max-width: 150px;
+      height: auto;
+    }
+  }
+}

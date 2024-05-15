@@ -37,11 +37,19 @@
     <div class="all-teapots-container">
       <% @teapots.each do |teapot| %>
         <div class="teapot-card">
-          <div class="card-picture"><%= cl_image_tag(teapot.images.first.key, width: 150, height: 150, crop: :fill) %></div>
+          <div class="card-picture">
+            <%= cl_image_tag(teapot.images.first.key, width: 300, height: 300, crop: :fill) %>
+          </div>
           <div class="card-info-container">
-            <p>Height: <%= teapot.height %></p>
-            <p>Width: <%= teapot.width %></p>
-            <p>Depth: <%= teapot.depth %></p>
+            <div class="dimension-box">
+              <%= image_tag "dimensions.png" %>
+              <p class="teapot-height-text">H: <%= teapot.height %> mm</p>
+              <p class="teapot-width-text">W: <%= teapot.width %> mm</p>
+              <p class="teapot-depth-text">D: <%= teapot.depth %> mm</p>
+            </div>
+            <div class="capacity-box"><%= image_tag "capacity.png" %>
+              <p class="teapot-ccs-text"><%= teapot.ccs %> cc</p>
+            </div>
             <p>Weight: <%= teapot.weight %></p>
           </div>
         </div>
