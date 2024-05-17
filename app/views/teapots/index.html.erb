@@ -41,16 +41,24 @@
             <%= cl_image_tag(teapot.images.first.key, width: 300, height: 300, crop: :fill) %>
           </div>
           <div class="card-info-container">
-            <div class="dimension-box">
-              <%= image_tag "dimensions.png" %>
-              <p class="teapot-height-text">H: <%= teapot.height %> mm</p>
-              <p class="teapot-width-text">W: <%= teapot.width %> mm</p>
-              <p class="teapot-depth-text">D: <%= teapot.depth %> mm</p>
+            <div class="visual-info-boxes-container">
+              <div class="dimension-box">
+                <%= image_tag "dimensions.png" %>
+                <p class="teapot-height-text"><%= teapot.height / 10.to_f %> cm</p>
+                <p class="teapot-width-text"><%= teapot.width / 10.to_f %> cm</p>
+                <p class="teapot-depth-text"><%= teapot.depth / 10.to_f %> cm</p>
+              </div>
+              <div class="capacity-box"><%= image_tag "capacity.png" %>
+                <p class="teapot-ccs-text"><%= teapot.ccs %> cc</p>
+              </div>
+              <div class="weight-box"><%= image_tag "weight.png" %>
+                <p class="teapot-weight-text"><%= teapot.weight %> g</p>
+              </div>
             </div>
-            <div class="capacity-box"><%= image_tag "capacity.png" %>
-              <p class="teapot-ccs-text"><%= teapot.ccs %> cc</p>
+            <div class="text-only-info-container">
+              <p class="teapot-price-text">￥<%= teapot.price %></p>
+              <p class="teapot-maker-text">Artist: <%= teapot.maker %></p>
             </div>
-            <p>Weight: <%= teapot.weight %></p>
           </div>
         </div>
       <% end %>

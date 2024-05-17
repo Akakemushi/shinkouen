@@ -5,23 +5,104 @@
   border-radius: 10px;
   box-shadow: 0 0 5px white;
   display: flex;
-  gap: 5px;
+  gap: 30px;
 
   .card-info-container {
-    .dimension-box {
+    display: flex;
+    flex-direction: column;
 
-      img {
-        max-width: 150px;
+    .visual-info-boxes-container {
+      display: flex;
+
+      .dimension-box {
+        width: 260px;
         height: auto;
+        position: relative;
+
+        img {
+          max-width: 200px;
+          height: auto;
+          top: 0px;
+          left: 0px;
+          position: absolute;
+        }
+
+        .teapot-height-text {
+          top: 51px;
+          left: 195px;
+          position: absolute;
+        }
+
+        .teapot-width-text {
+          top: 125px;
+          left: 4px;
+          position: absolute;
+        }
+
+        .teapot-depth-text {
+          top: 116px;
+          left: 158px;
+          position: absolute;
+        }
       }
-      p {
-        color: green;
+
+      .capacity-box {
+        width: 200px;
+        height: auto;
+        position: relative;
+
+        img {
+          max-width: 200px;
+          height: auto;
+        }
+
+        .teapot-ccs-text {
+          top: 75px;
+          left: 62px;
+          font-size: 1.5em;
+          position: absolute;
+        }
+      }
+
+      .weight-box {
+        width: 200px;
+        height: auto;
+        position: relative;
+
+        img {
+          max-width: 160px;
+          height: auto;
+          position: absolute;
+          top: 18px;
+          left: 0px;
+        }
+
+        .teapot-weight-text {
+          top: 70px;
+          left: 50px;
+          font-size: 1.5em;
+          position: absolute;
+        }
       }
     }
 
-    .capacity-box {
-      max-width: 150px;
-      height: auto;
+    .text-only-info-container {
+      padding-bottom: 10px;
+      padding-left: 10px;
+      border-radius: 5px;
+      background: linear-gradient(to right, $off-dark, $off-dark 60%, transparent);
+
+      .teapot-price-text {
+        font-size: 2.5em;
+        margin-bottom: 0;
+        margin-top: 0;
+      }
+
+      .teapot-maker-text {
+        font-size: 1.3em;
+        margin-bottom: 0;
+        margin-top: 0;
+      }
     }
   }
 }
