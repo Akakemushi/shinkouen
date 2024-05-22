@@ -18,10 +18,8 @@ also, I seem to require two files, pagy.js and pagy.css, which I had to manually
 picture filename are CaSe SenSiTive!  Even the .suffix!  .PNG does NOT equal .PNG
 
 
-if your new SCSS files stop working even after hard refreshing, try closing the server and running
-rails assets:clobber
-in the cli, then restart the server.
-
+ISSUE: new SCSS files stop working even after hard refreshing, styles aren't applied at all.
+FIXED: try closing the server and running     rails assets:clobber     in the cli, then restart the server.
 
 ISSUE:  Money.new(teapot.price, "JPY").format   seems to return a string, however when I try to modify the array, I can't save a string to an integer field.  It reads as a zero when displayed
 FIXED:  Altered the MODEL by adding a method which returns the formated string version of its own price.
