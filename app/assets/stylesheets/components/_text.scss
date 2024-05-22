@@ -1,3 +1,11 @@
 h1, h2, h3, p {
-  color: $light;
+  color: white;
+}
+
+p {
+  font-family: $body-font;
+}
+
+h1, h2, h3 {
+  font-family: $headers-font;
 }

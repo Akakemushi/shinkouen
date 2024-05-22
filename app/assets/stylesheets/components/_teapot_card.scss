@@ -3,9 +3,12 @@
   padding: 20px;
   margin-top: 20px;
   border-radius: 10px;
-  box-shadow: 0 0 5px white;
   display: flex;
   gap: 30px;
+
+  .card-picture {
+    border-radius: 10px;
+  }
 
   .card-info-container {
     display: flex;

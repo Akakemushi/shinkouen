@@ -20,4 +20,11 @@ picture filename are CaSe SenSiTive!  Even the .suffix!  .PNG does NOT equal .PN
 
 if your new SCSS files stop working even after hard refreshing, try closing the server and running
 rails assets:clobber
-in the cli, then restart the server.  
+in the cli, then restart the server.
+
+
+ISSUE:  Money.new(teapot.price, "JPY").format   seems to return a string, however when I try to modify the array, I can't save a string to an integer field.  It reads as a zero when displayed
+FIXED:  Altered the MODEL by adding a method which returns the formated string version of its own price.
+
+ISSUE:  Getting rid of the lame underlines on hyperlinks
+FIXED: You need to set text-decoration: none; on NOT ONLY the tag, but also its variants  a:visited   a:link   a:hover    a:active

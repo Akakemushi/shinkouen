@@ -1,0 +1,12 @@
+.section-title {
+  position: relative;
+  left: -50px;
+  font-size: 5em;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+  padding-left: 40px;
+  border-top-left-radius: 60px;
+  border-bottom-left-radius: 60px;
+  background: linear-gradient(to right, $off-dark, $off-dark 60%, transparent);
+}

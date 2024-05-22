@@ -1,8 +1,11 @@
+require 'money'
+
 class TeapotsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
   def index
     teapots = Teapot.all
+
     @most_popular = teapots.sort_by { |teapot| teapot.views }.reverse.take(6)
 
     if params[:q].present?

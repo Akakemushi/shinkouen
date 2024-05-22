@@ -1,5 +1,7 @@
+
 <section>
   <div class="container">
+    <h1 class="section-title">Most Popular</h1>
     <div class="carousel">
       <input type="radio" name="slides" checked="checked" id="slide-1">
       <input type="radio" name="slides" id="slide-2">
@@ -18,7 +20,7 @@
               <% end %>
             </div>
             <figcaption>
-              <h3>￥<%= teapot.price %></h3>
+              <h1><%= teapot.formatted_price %></h1>
               <%= teapot.comment %>
               <span class="maker">Artist: <%= teapot.maker %></span>
             </figcaption>
@@ -34,6 +36,11 @@
         <% end %>
       </ul>
     </div>
+  </div>
+  <div class="section-spacer">
+  </div>
+  <div class="container">
+    <h1 class="section-title">Collection</h1>
     <div class="all-teapots-container">
       <% @teapots.each do |teapot| %>
         <div class="teapot-card">
@@ -56,13 +63,13 @@
               </div>
             </div>
             <div class="text-only-info-container">
-              <p class="teapot-price-text">￥<%= teapot.price %></p>
-              <p class="teapot-maker-text">Artist: <%= teapot.maker %></p>
+              <p class="teapot-price-text"><%= teapot.formatted_price %></p>
+              <p class="teapot-maker-text">Artist:   <strong><%= teapot.maker %></strong></p>
             </div>
           </div>
         </div>
       <% end %>
-      <%= pagy_nav(@pagy).html_safe %>
+      <h2 class="paginator"><%= pagy_nav(@pagy).html_safe %></h2>
     </div>
   </div>
 </section>
