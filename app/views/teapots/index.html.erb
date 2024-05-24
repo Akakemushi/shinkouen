@@ -43,33 +43,21 @@
     <h1 class="section-title">Collection</h1>
     <div class="all-teapots-container">
       <% @teapots.each do |teapot| %>
-        <div class="teapot-card">
-          <div class="card-picture">
-            <%= cl_image_tag(teapot.images.first.key, width: 300, height: 300, crop: :fill) %>
-          </div>
-          <div class="card-info-container">
-            <div class="visual-info-boxes-container">
-              <div class="dimension-box">
-                <%= image_tag "dimensions.png" %>
-                <p class="teapot-height-text"><%= teapot.height / 10.to_f %> cm</p>
-                <p class="teapot-width-text"><%= teapot.width / 10.to_f %> cm</p>
-                <p class="teapot-depth-text"><%= teapot.depth / 10.to_f %> cm</p>
-              </div>
-              <div class="capacity-box"><%= image_tag "capacity.png" %>
-                <p class="teapot-ccs-text"><%= teapot.ccs %> cc</p>
-              </div>
-              <div class="weight-box"><%= image_tag "weight.png" %>
-                <p class="teapot-weight-text"><%= teapot.weight %> g</p>
-              </div>
+        <%= link_to teapot_path(teapot), class: "teapot-link" do %>
+          <div class="teapot-card-simple">
+            <div class="fade-carousel-container">
+            <div class="card-picture">
+              <%= cl_image_tag(teapot.images.first.key, width: 300, height: 300, crop: :fill) %>
             </div>
-            <div class="text-only-info-container">
+            </div>
+            <div class="card-info-container">
               <p class="teapot-price-text"><%= teapot.formatted_price %></p>
-              <p class="teapot-maker-text">Artist:   <strong><%= teapot.maker %></strong></p>
+              <p class="teapot-maker-text"><strong><%= teapot.maker %></strong></p>
             </div>
           </div>
-        </div>
+        <% end %>
       <% end %>
-      <h2 class="paginator"><%= pagy_nav(@pagy).html_safe %></h2>
     </div>
+    <h2 class="paginator"><%= pagy_nav(@pagy).html_safe %></h2>
   </div>
 </section>

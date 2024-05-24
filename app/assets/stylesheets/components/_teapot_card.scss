@@ -15,15 +15,17 @@
     flex-direction: column;
 
     .visual-info-boxes-container {
-      display: flex;
+      display: grid;
+      justify-items: center;
+      grid-template-columns: repeat(2, 1fr);
 
       .dimension-box {
-        width: 260px;
+        width: 230px;
         height: auto;
         position: relative;
 
         img {
-          max-width: 200px;
+          max-width: 170px;
           height: auto;
           top: 0px;
           left: 0px;
@@ -31,37 +33,37 @@
         }
 
         .teapot-height-text {
-          top: 51px;
-          left: 195px;
+          top: 40px;
+          left: 170px;
           position: absolute;
         }
 
         .teapot-width-text {
-          top: 125px;
-          left: 4px;
+          top: 102px;
+          left: -7px;
           position: absolute;
         }
 
         .teapot-depth-text {
-          top: 116px;
-          left: 158px;
+          top: 100px;
+          left: 140px;
           position: absolute;
         }
       }
 
       .capacity-box {
-        width: 200px;
+        width: 180px;
         height: auto;
         position: relative;
 
         img {
-          max-width: 200px;
+          max-width: 170px;
           height: auto;
         }
 
         .teapot-ccs-text {
-          top: 75px;
-          left: 62px;
+          top: 58px;
+          left: 48px;
           font-size: 1.5em;
           position: absolute;
         }
@@ -73,38 +75,59 @@
         position: relative;
 
         img {
-          max-width: 160px;
+          max-width: 150px;
           height: auto;
-          position: absolute;
           top: 18px;
           left: 0px;
         }
 
         .teapot-weight-text {
-          top: 70px;
-          left: 50px;
+          top: 45px;
+          left: 45px;
           font-size: 1.5em;
           position: absolute;
         }
       }
     }
 
-    .text-only-info-container {
-      padding-bottom: 10px;
-      padding-left: 10px;
-      border-radius: 5px;
-      background: linear-gradient(to right, $off-dark, $off-dark 60%, transparent);
+    .teapot-info-lower-half {
+      display: flex;
+      align-items: center;
 
-      .teapot-price-text {
-        font-size: 2.5em;
-        margin-bottom: 0;
-        margin-top: 0;
+      .text-only-info-container {
+        flex-grow: 1;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        border-radius: 5px;
+        background: linear-gradient(to right, $off-dark, $off-dark 60%, transparent);
+
+        .teapot-price-text {
+          font-size: 2.5em;
+          margin-bottom: 0;
+          margin-top: 0;
+        }
+
+        .teapot-maker-text {
+          font-size: 1.3em;
+          margin-bottom: 0;
+          margin-top: 0;
+        }
       }
 
-      .teapot-maker-text {
-        font-size: 1.3em;
-        margin-bottom: 0;
-        margin-top: 0;
+      a {
+        font-size: 20px;
+        height: 40px;
+        width: 120px;
+        border-radius: 8px;
+        background-color: $green;
+        color: black;
+        text-decoration: none;
+        text-align: center;
+        line-height: 1.8;
+      }
+
+      a:visited {
+        text-decoration: none;
       }
     }
   }

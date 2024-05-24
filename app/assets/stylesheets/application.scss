@@ -9,3 +9,12 @@
 @import "components/index";
 @import "pages/index";
 
+// Careful, styles added below will apply across the entire app. Use sparingly.
+
+a {
+  text-decoration: none;
+}
+
+p {
+  text-decoration: none;
+}

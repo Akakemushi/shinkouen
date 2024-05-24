@@ -9,7 +9,7 @@ class TeapotsController < ApplicationController
       teapots = Teapot.search(params[:q])
     end
 
-    @pagy, @teapots = pagy(teapots, items: 10)
+    @pagy, @teapots = pagy(teapots, items: 24)
   end
 
   def show
