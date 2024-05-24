@@ -42,22 +42,21 @@
   <div class="container">
     <h1 class="section-title">Collection</h1>
     <div class="all-teapots-container">
-      <% @teapots.each do |teapot| %>
-        <%= link_to teapot_path(teapot), class: "teapot-link" do %>
-          <div class="teapot-card-simple">
-            <div class="fade-carousel-container">
-            <div class="card-picture">
-              <%= cl_image_tag(teapot.images.first.key, width: 300, height: 300, crop: :fill) %>
-            </div>
-            </div>
-            <div class="card-info-container">
-              <p class="teapot-price-text"><%= teapot.formatted_price %></p>
-              <p class="teapot-maker-text"><strong><%= teapot.maker %></strong></p>
-            </div>
+    <% @teapots.each do |teapot| %>
+      <%= link_to teapot_path(teapot), class: "teapot-link" do %>
+        <div class="teapot-card-simple">
+          <div class="teapot-item">
+            <% first_image = teapot.images.first.key %>
+            <%= cl_image_tag(first_image, alt: "Teapot Image", class: "teapot-image", data: { images: teapot.images.map(&:key) }) %>
           </div>
-        <% end %>
+          <div class="card-info-container">
+            <p class="teapot-price-text"><%= teapot.formatted_price %></p>
+            <p class="teapot-maker-text"><strong><%= teapot.maker %></strong></p>
+          </div>
+        </div>
       <% end %>
-    </div>
+    <% end %>
+  </div>
     <h2 class="paginator"><%= pagy_nav(@pagy).html_safe %></h2>
   </div>
 </section>

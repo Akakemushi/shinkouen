@@ -50,6 +50,7 @@ gem "pundit"
 gem "dotenv-rails"
 gem "pagy"
 gem "money"
+gem "jquery-rails"
 
 
 
