@@ -5,6 +5,7 @@ import "controllers"
 
 
 
+
 $(function() {
   $('.teapot-link').on('mouseenter', function() {
     const images = $(this).find('.teapot-image').data('images');
@@ -13,20 +14,42 @@ $(function() {
     const element = $(this).find('.teapot-image');
     const cloudinaryBaseUrl = 'https://res.cloudinary.com/djrrhiw1o/image/upload/v1/development/'; // replace with your Cloudinary cloud name
 
+    // Preload images
+    images.forEach((key) => {
+      const img = new Image();
+      img.src = cloudinaryBaseUrl + key;
+    });
+
+    // Clear any existing interval
+    if (element.data('intervalId')) {
+      clearInterval(element.data('intervalId'));
+    }
+
     const intervalId = setInterval(function() {
+      currentIndex = (currentIndex + 1) % imageCount; // Update currentIndex before using it
       const imageUrl = cloudinaryBaseUrl + images[currentIndex];
-      element.css('opacity', '0'); // Start fade out
-      setTimeout(() => {
-        element.attr('src', imageUrl);
-        element.css('opacity', '1'); // Fade in the new image
-      }, 500); // Match this duration with the CSS transition duration
-      currentIndex = (currentIndex + 1) % imageCount;
-    }, 2000); // Change image every 2 seconds
+
+      element.fadeOut(500, function() {
+        element.attr('src', imageUrl).fadeIn(500);
+      });
+
+    }, 3000); // Change image every 3 seconds
 
     // Save the interval ID to the element's data to clear it later
     element.data('intervalId', intervalId);
   }).on('mouseleave', function() {
     // Clear the interval when the mouse leaves
-    clearInterval($(this).find('.teapot-image').data('intervalId'));
+    const element = $(this).find('.teapot-image');
+    clearInterval(element.data('intervalId'));
+    element.removeData('intervalId'); // Remove the interval ID data
+
+    const images = element.data('images');
+    const initialImage = images[0];
+    const cloudinaryBaseUrl = 'https://res.cloudinary.com/djrrhiw1o/image/upload/v1/development/'; // replace with your Cloudinary cloud name
+
+    // Reset to the initial image
+    element.fadeOut(500, function() {
+      element.attr('src', cloudinaryBaseUrl + initialImage).fadeIn(500);
+    });
   });
 });

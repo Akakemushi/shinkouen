@@ -35,7 +35,11 @@ ISSUE:  <p> elements that are children (not even direct children) of a wrapping 
 FIXED:  I changed the root design of <a> and <p> tags in the main stylesheet. That seemed to overwrite the problem.
 
 ISSUE:  Trying to implement a fading carousel for the index page, but having lots of issues.  Currently working on "carousel" branch.  GPT says use
-Jquery, but I can't seem to get that to work?  browser console doesn't recognize the $ needed in Jquery.
+    Jquery, but I can't seem to get that to work?  browser console doesn't recognize the $ needed in Jquery.
+FIXED:  To install Jquery in Rails 7, first you need the gem "jquery-rails", then you need to put this line in the "importmap.rb" file...
+     pin "jquery", to: "https://code.jquery.com/jquery-3.6.0.min.js" (you can find the file in the config folder), and finally, you need to put
+     import "jquery"    in the .js files that will use jquery.  (i think that's all the steps, in your main .erb file, <%= javascript_importmap_tags %>
+     should already be there by default)
 
 Tousan Notes
 If priced over, 5man over, show more photos
