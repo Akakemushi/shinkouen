@@ -29,6 +29,7 @@ $(function() {
       currentIndex = (currentIndex + 1) % imageCount; // Update currentIndex before using it
       const imageUrl = cloudinaryBaseUrl + images[currentIndex];
 
+      // Fade out current image, update src, fade in next image
       element.fadeOut(500, function() {
         element.attr('src', imageUrl).fadeIn(500);
       });
@@ -47,9 +48,9 @@ $(function() {
     const initialImage = images[0];
     const cloudinaryBaseUrl = 'https://res.cloudinary.com/djrrhiw1o/image/upload/v1/development/'; // replace with your Cloudinary cloud name
 
-    // Reset to the initial image
-    element.fadeOut(500, function() {
-      element.attr('src', cloudinaryBaseUrl + initialImage).fadeIn(500);
-    });
+    // Reset to the initial image immediately
+    element.attr('src', cloudinaryBaseUrl + initialImage).css('opacity', '1');
   });
 });
+
+
