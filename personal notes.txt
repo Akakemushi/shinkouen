@@ -41,6 +41,19 @@ FIXED:  To install Jquery in Rails 7, first you need the gem "jquery-rails", the
      import "jquery"    in the .js files that will use jquery.  (i think that's all the steps, in your main .erb file, <%= javascript_importmap_tags %>
      should already be there by default)
 
+ISSUE:  I have a bunch of stuff inside of a div, including a carousel, however the carousel is not included within the div's boundaries for some reason.
+FIXED:  My fault.  I had one of the children divs set specifically to height 500px, and the carousel was INSIDE that one.  Getting rid of the 500px limit fixed it.
+
+ISSUE:  Not sure where to register the Stimulus Controller... there are TWO files called application.js
+FIXED:  In Rails 7, it's the one INSIDE the Controllers folder.  Add an "import" statement right under the "import {application} line, and
+        add a line      Stimulus.register("teapot-slides", TeapotSlidesController); AFTER this stuff --> const application = Application.start(); application.debug = false; window.Stimulus   = application;
+
+ISSUE:  Was getting an error in the browser console "TypeError: Failed to resolve module specifier "stimulus". Relative references must start with either "/", "./", or "../".
+FIXED:  Caused by a controller file I made, at the top I had simply "stimulus", but I needed "@hotwired/stimulus"
+
+ISSUE:  
+
+
 Tousan Notes
 If priced over, 5man over, show more photos
 photos should automatically rotate

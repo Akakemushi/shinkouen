@@ -4,10 +4,10 @@
   margin-top: 20px;
   border-radius: 10px;
 
-  .teapot-item {
+  .teapot-slides {
     position: relative;
-    width: 300px; /* Set a fixed width for the container */
-    height: 300px; /* Set a fixed height for the container */
+    width: 300px;
+    height: 300px;
   }
 
   .teapot-image {
@@ -16,8 +16,20 @@
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensures the image covers the container without distortion */
-    transition: opacity 0.5s ease-in-out; /* Adds the fade effect */
+    object-fit: cover;
+    transition: opacity 0.5s ease-in-out;
+    opacity: 100%;
+  }
+
+  .teapot-image-hidden {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.5s ease-in-out;
+    opacity: 0%;
   }
 
   .teapot-image:hover {
