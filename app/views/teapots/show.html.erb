@@ -1,33 +1,61 @@
 <div class="container">
   <h1 class="section-title"><%= @teapot.maker %></h1>
   <div class="teapot-card">
-          <div class="card-picture">
-            <%= cl_image_tag(@teapot.images.first.key, width: 500, height: 500, crop: :fill) %>
-          </div>
-          <div class="card-info-container">
-            <div class="visual-info-boxes-container">
-              <div class="dimension-box">
-                <%= image_tag "dimensions.png" %>
-                <p class="teapot-height-text"><%= @teapot.height / 10.to_f %> cm</p>
-                <p class="teapot-width-text"><%= @teapot.width / 10.to_f %> cm</p>
-                <p class="teapot-depth-text"><%= @teapot.depth / 10.to_f %> cm</p>
+    <div>
+    <div class="carousel-two">
+      <% if @teapot.images.count > 1 %>
+        <% @teapot.images.each_with_index do |image, index| %>
+          <% if index == 0 %>
+            <input type="radio" name="slides" checked="checked" id="slide-1">
+          <% else %>
+            <input type="radio" name="slides" id="slide-<%= index + 1 %>">
+          <% end %>
+        <% end %>
+      <% end %>
+      <ul class="carousel_two__slides">
+        <% @teapot.images.each do |image| %>
+          <li class="carousel_two__slide">
+            <figure>
+              <div>
+                <%= cl_image_tag(image.key, width: 500, height: 500, crop: :fill) %>
               </div>
-              <div class="capacity-box"><%= image_tag "capacity.png" %>
-                <p class="teapot-ccs-text"><%= @teapot.ccs %> cc</p>
-              </div>
-              <div class="weight-box"><%= image_tag "weight.png" %>
-                <p class="teapot-weight-text"><%= @teapot.weight %> g</p>
-              </div>
-              <div class="teapot-type-info">
-                <p>Style: <%= @teapot.shape %></p>
-                <p>Firing: <%= @teapot.kilntype %></p>
-              </div>
-            </div>
-            <div class="teapot-info-lower-half">
-              <div class="text-only-info-container">
-                <p class="teapot-price-text"><%= @teapot.formatted_price %></p>
-              </div>
-            </div>
-          </div>
+            </figure>
+          </li>
+        <% end %>
+      </ul>
+      <ul class="carousel_two__thumbnails">
+        <% @teapot.images.each_with_index do |image, index| %>
+          <li>
+            <label for="slide-<%= index + 1 %>"><%= cl_image_tag(image.key, width: 68, height: 68, crop: :fill) %></label>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    </div>
+    <div class="card-info-container">
+      <div class="visual-info-boxes-container">
+        <div class="dimension-box">
+          <%= image_tag "dimensions.png" %>
+          <p class="teapot-height-text"><%= @teapot.height / 10.to_f %> cm</p>
+          <p class="teapot-width-text"><%= @teapot.width / 10.to_f %> cm</p>
+          <p class="teapot-depth-text"><%= @teapot.depth / 10.to_f %> cm</p>
         </div>
+        <div class="capacity-box"><%= image_tag "capacity.png" %>
+          <p class="teapot-ccs-text"><%= @teapot.ccs %> cc</p>
+        </div>
+        <div class="weight-box"><%= image_tag "weight.png" %>
+          <p class="teapot-weight-text"><%= @teapot.weight %> g</p>
+        </div>
+        <div class="teapot-type-info">
+          <p>Style: <%= @teapot.shape %></p>
+          <p>Firing: <%= @teapot.kilntype %></p>
+        </div>
+      </div>
+      <div class="teapot-info-lower-half">
+        <div class="text-only-info-container">
+          <p class="teapot-price-text"><%= @teapot.formatted_price %></p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

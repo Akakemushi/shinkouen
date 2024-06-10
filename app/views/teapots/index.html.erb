@@ -10,22 +10,22 @@
       <input type="radio" name="slides" id="slide-5">
       <input type="radio" name="slides" id="slide-6">
       <ul class="carousel__slides">
-      <% @most_popular.each do |teapot| %>
-        <li class="carousel__slide">
-          <figure>
-            <div>
-              <%# <img src="https://picsum.photos/id/1041/800/450" alt=""> %>
-              <% if teapot.images.attached? %>
-                <%= cl_image_tag(teapot.images.first.key, width: 300, height: 300, crop: :fill) %>
-              <% end %>
-            </div>
-            <figcaption>
-              <h1><%= teapot.formatted_price %></h1>
-              <%= teapot.comment %>
-              <span class="maker">Artist: <%= teapot.maker %></span>
-            </figcaption>
-          </figure>
-        </li>
+        <% @most_popular.each do |teapot| %>
+          <li class="carousel__slide">
+            <figure>
+              <div>
+                <%# <img src="https://picsum.photos/id/1041/800/450" alt=""> %>
+                <% if teapot.images.attached? %>
+                  <%= cl_image_tag(teapot.images.first.key, width: 300, height: 300, crop: :fill) %>
+                <% end %>
+              </div>
+              <figcaption>
+                <h1><%= teapot.formatted_price %></h1>
+                <%= teapot.comment %>
+                <span class="maker">Artist: <%= teapot.maker %></span>
+              </figcaption>
+            </figure>
+          </li>
         <% end %>
       </ul>
       <ul class="carousel__thumbnails">
@@ -42,13 +42,19 @@
   <div class="container">
     <h1 class="section-title">Collection</h1>
     <div class="all-teapots-container">
-      <% @teapots.each do |teapot| %>
+      <% @teapots.each_with_index do |teapot, teapot_index| %>
         <%= link_to teapot_path(teapot), class: "teapot-link" do %>
           <div class="teapot-card-simple">
-            <div class="fade-carousel-container">
-            <div class="card-picture">
-              <%= cl_image_tag(teapot.images.first.key, width: 300, height: 300, crop: :fill) %>
-            </div>
+            <div  class="teapot-slides" data-controller="teapot-slides" data-action="mouseenter->teapot-slides#startSlideshow mouseleave->teapot-slides#stopSlideshow">
+              <% teapot.images.each_with_index do |image, image_index| %>
+                <% if image_index == 0 %>
+                  <% key = teapot.images[image_index].key %>
+                  <%= cl_image_tag(key, alt: "Teapot Image", class: "teapot-image", id: "slide-#{teapot_index + 1}-#{image_index + 1}", width: 300, height: 300, crop: :fill, data: { 'teapot-slides-target': 'slide' }) %>
+                <% else %>
+                  <% key = teapot.images[image_index].key %>
+                  <%= cl_image_tag(key, alt: "Teapot Image", class: "teapot-image-hidden", id: "slide-#{teapot_index + 1}-#{image_index + 1}", width: 300, height: 300, crop: :fill, data: { 'teapot-slides-target': 'slide' }) %>
+                <% end %>
+              <% end %>
             </div>
             <div class="card-info-container">
               <p class="teapot-price-text"><%= teapot.formatted_price %></p>
