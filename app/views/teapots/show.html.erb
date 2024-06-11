@@ -46,11 +46,14 @@
             <p class="teapot-weight-text"><%= @teapot.weight %> g</p>
           </div>
           <div class="teapot-type-info">
-            <p>Style: <%= @teapot.shape %></p>
+            <p>Shape: <%= @teapot.shape %></p>
             <p>Firing: <%= @teapot.kilntype %></p>
           </div>
         </div>
         <div class="teapot-info-lower-half">
+          <div class="comment-box">
+            <p><%= @teapot.comment %></p>
+          </div>
           <div class="text-only-info-container">
             <p class="teapot-price-text"><%= @teapot.formatted_price %></p>
           </div>
