@@ -89,11 +89,19 @@
           position: absolute;
         }
       }
+
+      .teapot-type-info {
+        font-size: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
     }
 
     .teapot-info-lower-half {
       display: flex;
-      align-items: center;
+      flex-direction: column;
+      justify-content: center;
 
       .text-only-info-container {
         flex-grow: 1;

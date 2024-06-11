@@ -14,7 +14,6 @@
           <li class="carousel__slide">
             <figure>
               <div>
-                <%# <img src="https://picsum.photos/id/1041/800/450" alt=""> %>
                 <% if teapot.images.attached? %>
                   <%= cl_image_tag(teapot.images.first.key, width: 300, height: 300, crop: :fill) %>
                 <% end %>
