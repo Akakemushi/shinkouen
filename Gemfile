@@ -51,6 +51,8 @@ gem "dotenv-rails"
 gem "pagy"
 gem "money"
 gem "money-rails"
+gem "jquery-rails"
+
 
 
 
