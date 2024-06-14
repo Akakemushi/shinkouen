@@ -15,12 +15,24 @@ right now I'm troubleshooting...
 First you need to include the line "include Pagy::Frontend" in the relevant "helper" module.
 also, I seem to require two files, pagy.js and pagy.css, which I had to manually create inside the app/javascript  and app/assets/stylesheets folders respectively... the files are blank, but that's ok I guess?
 
+Money Installation Notes
+When making a shopping site, you will typically need both the "money" and "money-rails" gems.  Not sure of the details, but "money" seems to provide
+core functionality, while "money-rails" adds some other features.  It also seems (according to AI) that if you add "money-rails" that "money" will also
+get installed because the former depends on the latter to function.
+Once you bundle those gems, activate them with this line...    rails g money_rails:initializer
+I should also note that you should NOT add a "price" column to the table in the beginning.  Wait until AFTER you have the gem installed, and then use
+the gem version of the "price" column instead.  Otherwise it's a hassle to undo the previous and redo a new one. (trust old me)
+Another thing about this system.  In the schema, you'll see "price_cents", and maybe something "currency", yet in the view's .erb file, you will
+reference these by doing teapot.price   WITHOUT the _cents.  This is something that the gem is handling.  It returns a money object instead of a
+straight integer.
+
 picture filename are CaSe SenSiTive!  Even the .suffix!  .PNG does NOT equal .PNG
 
 ==============Q U I C K   L O O K U P S======================
 - gco -b name     to create a new branch.  Need the -b for a new one.
 
 ==============P  R  O  B  L  E  M  S===================
+
 
 ISSUE: new SCSS files stop working even after hard refreshing, styles aren't applied at all.
 FIXED: try closing the server and running     rails assets:clobber     in the cli, then restart the server.

@@ -13,6 +13,7 @@ class CreateTeapots < ActiveRecord::Migration[7.1]
       t.string :maker, null: false
       t.integer :views, null: false, default: 0
       t.boolean :in_stock, null: false, default: true
+      t.string :sku, null: false
       t.timestamps
     end
   end

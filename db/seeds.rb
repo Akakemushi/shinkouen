@@ -44,6 +44,7 @@ maker = ["Yuutarou Yamada", "Yoshiki Murata", "Fujita Tokuta", "Yutaka Tsuzuki",
 
 # Array of image file names
 images = (1..50).map { |i| "teapot#{i}.jpg" }
+sku = 0
 
 30.times do
   # Generate random attributes
@@ -55,6 +56,7 @@ images = (1..50).map { |i| "teapot#{i}.jpg" }
   price = rand(5000..200000)
   views = rand(0..1000)
   in_stock = true
+  sku += 1
 
 
   # Create a new teapot
@@ -70,7 +72,8 @@ images = (1..50).map { |i| "teapot#{i}.jpg" }
     kilntype: kilntype[rand(7)],
     shape: shape[rand(5)],
     maker: maker[rand(9)],
-    comment: comment[rand(10)]
+    comment: comment[rand(10)],
+    sku: sku
   )
 
   # Attach 4-8 random images to the teapot

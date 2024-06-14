@@ -19,7 +19,7 @@
                 <% end %>
               </div>
               <figcaption>
-                <h1><%= teapot.formatted_price %></h1>
+                <h1><%= humanized_money_with_symbol(teapot.price) %></h1>
                 <%= teapot.comment %>
                 <span class="maker">Artist: <%= teapot.maker %></span>
               </figcaption>
@@ -56,7 +56,7 @@
               <% end %>
             </div>
             <div class="card-info-container">
-              <p class="teapot-price-text"><%= teapot.formatted_price %></p>
+              <p class="teapot-price-text"><%= humanized_money_with_symbol(teapot.price) %></p>
               <p class="teapot-maker-text"><strong><%= teapot.maker %></strong></p>
             </div>
           </div>

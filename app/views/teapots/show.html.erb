@@ -3,33 +3,33 @@
     <h1 class="section-title"><%= @teapot.maker %></h1>
     <div class="teapot-card">
       <div>
-      <div class="carousel-two">
-        <% @teapot.images.each_with_index do |image, index| %>
-          <% if index == 0 %>
-            <input type="radio" name="slides" checked="checked" id="slide-1">
-          <% else %>
-            <input type="radio" name="slides" id="slide-<%= index + 1 %>">
-          <% end %>
-        <% end %>
-        <ul class="carousel_two__slides">
-          <% @teapot.images.each do |image| %>
-            <li class="carousel_two__slide">
-              <figure>
-                <div>
-                  <%= cl_image_tag(image.key, width: 500, height: 500, crop: :fill) %>
-                </div>
-              </figure>
-            </li>
-          <% end %>
-        </ul>
-        <ul class="carousel_two__thumbnails">
+        <div class="carousel-two">
           <% @teapot.images.each_with_index do |image, index| %>
-            <li>
-              <label for="slide-<%= index + 1 %>"><%= cl_image_tag(image.key, width: 68, height: 68, crop: :fill) %></label>
-            </li>
+            <% if index == 0 %>
+              <input type="radio" name="slides" checked="checked" id="slide-1">
+            <% else %>
+              <input type="radio" name="slides" id="slide-<%= index + 1 %>">
+            <% end %>
           <% end %>
-        </ul>
-      </div>
+          <ul class="carousel_two__slides">
+            <% @teapot.images.each do |image| %>
+              <li class="carousel_two__slide">
+                <figure>
+                  <div>
+                    <%= cl_image_tag(image.key, width: 500, height: 500, crop: :fill) %>
+                  </div>
+                </figure>
+              </li>
+            <% end %>
+          </ul>
+          <ul class="carousel_two__thumbnails">
+            <% @teapot.images.each_with_index do |image, index| %>
+              <li>
+                <label for="slide-<%= index + 1 %>"><%= cl_image_tag(image.key, width: 68, height: 68, crop: :fill) %></label>
+              </li>
+            <% end %>
+          </ul>
+        </div>
       </div>
       <div class="card-info-container">
         <div class="visual-info-boxes-container">
