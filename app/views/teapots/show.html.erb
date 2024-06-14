@@ -25,7 +25,7 @@
             </div>
             <div class="teapot-info-lower-half">
               <div class="text-only-info-container">
-                <p class="teapot-price-text"><%= @teapot.formatted_price %></p>
+                <p class="teapot-price-text"><%= humanized_money_with_symbol(@teapot.price) %></p>
               </div>
             </div>
           </div>
