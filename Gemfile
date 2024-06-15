@@ -52,6 +52,7 @@ gem "pagy"
 gem "money"
 gem "money-rails"
 gem "jquery-rails"
+gem "stripe"
 
 
 

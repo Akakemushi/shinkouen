@@ -26,6 +26,16 @@ Another thing about this system.  In the schema, you'll see "price_cents", and m
 reference these by doing teapot.price   WITHOUT the _cents.  This is something that the gem is handling.  It returns a money object instead of a
 straight integer.
 
+Stripe Payment System Notes
+First you'll need to create an account that will be linked to the payments.  It needs a name and an email.  From that you'll get .env keys.
+Next get the "stripe" gem and bundle install.       Next put this in the initializer file
+Rails.configuration.stripe = {
+  publishable_key: ENV['STRIPE_PUBLISHABLE_KEY'],
+  secret_key:      ENV['STRIPE_SECRET_KEY']
+}
+
+Stripe.api_key = Rails.configuration.stripe[:secret_key]
+
 picture filename are CaSe SenSiTive!  Even the .suffix!  .PNG does NOT equal .PNG
 
 ==============Q U I C K   L O O K U P S======================
@@ -63,7 +73,7 @@ FIXED:  In Rails 7, it's the one INSIDE the Controllers folder.  Add an "import"
 ISSUE:  Was getting an error in the browser console "TypeError: Failed to resolve module specifier "stimulus". Relative references must start with either "/", "./", or "../".
 FIXED:  Caused by a controller file I made, at the top I had simply "stimulus", but I needed "@hotwired/stimulus"
 
-ISSUE:  
+ISSUE:
 
 
 Tousan Notes

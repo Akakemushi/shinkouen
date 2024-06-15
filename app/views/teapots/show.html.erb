@@ -57,6 +57,10 @@
           <div class="text-only-info-container">
             <p class="teapot-price-text"><%= @teapot.formatted_price %></p>
           </div>
+          <%= form_with url: orders_path do %>
+            <%= hidden_field_tag 'teapot_id', @teapot.id %>
+            <%= submit_tag 'Purchase', class: 'small-action-button' %>
+          <% end %>
         </div>
       </div>
     </div>
