@@ -8,8 +8,9 @@ export default class extends Controller {
   remove(event) {
     event.preventDefault();
     const form = event.target.closest("form");
+    const cartItemId = form.querySelector('input[name="cart_item_id"]').value;
 
-    fetch(form.action, {
+    fetch(`/cart_items/${cartItemId}`, {
       method: "DELETE",
       headers: {
         "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').content,

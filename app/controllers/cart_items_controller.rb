@@ -16,7 +16,7 @@ class CartItemsController < ApplicationController
       if @cart_item.save
         respond_to do |format|
           format.html { redirect_to @teapot, notice: "Teapot successfully added to your cart." }
-          format.json { render json: { message: "Teapot successfully added to your cart." }, status: :created }
+          format.json { render json: { message: "Teapot successfully added to your cart.", cart_item_id: @cart_item.id }, status: :created }
         end
       else
         respond_to do |format|
