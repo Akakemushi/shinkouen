@@ -123,3 +123,17 @@ old index html code--------
       <h2 class="paginator"><%= pagy_nav(@pagy).html_safe %></h2>
     </div>
     END OF OLD HTML CODE -----------
+
+    NOTES ABOUT HOW STRIPE WORKS
+    -Stripe uses 2 things, "Products" and "Prices".
+    -When starting out, you seem to need to import you catalog of products into Stripe.  The introduction
+    given doesn't state directly that this is necessary, however it strongly aludes to that being the case.
+    -There is something called a "multi-currency Price" that handles the same product sold in different currencies.
+    -Products created in test mode can be copied over to live mode via the dashboard.  Be aware though that if you later make changes to the test mode
+    version, those changes will NOT be reflected in the Live version.
+
+    Questions for Stripe devs
+    -If I do not create a multi-currency Price and just sell everything in Yen, what happens if someone orders from overseas and tries to pay in dollars?
+    -Is it possible to use Stripe just for payments, and handle the products and shopping cart on my end? Is it possible to use the payment form they have
+    in that case, or do I need to use their catalog system for that?
+    

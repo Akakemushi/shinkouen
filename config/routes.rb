@@ -1,10 +1,16 @@
 Rails.application.routes.draw do
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+
   resources :teapots
+  
   resources :orders, only: [:show, :create]
   resources :orders, only: [:show, :create] do
     resources :payments, only: :new
+  end
+
+  Rails.application.routes.draw do
+    resources :cart_items, only: [:create, :destroy]
   end
 
 
