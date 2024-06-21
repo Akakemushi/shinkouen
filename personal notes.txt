@@ -74,7 +74,13 @@ ISSUE:  Was getting an error in the browser console "TypeError: Failed to resolv
 FIXED:  Caused by a controller file I made, at the top I had simply "stimulus", but I needed "@hotwired/stimulus"
 
 ISSUE:  Stimulus related action works on page refresh, but not after that. Console gives the message SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
-
+FIXED:  Very difficult tbh.  This can happen when the state of the running JavaScript and the state of the running Ruby on the server don't match.
+        It can happen for a number of reasons.  One is that Javascript is expecting to get a particular data format, either JSON or HTML, but it gets
+        an unexpected data type.  To fix, make sure you handle different kinds of responses from the server appropriately.  Another thing that can happen
+        is that the JavaScript simply isn't updating the page correctly after getting a response from the server. In this case the fix isn't simple. It can
+        also happen if the request made to the server is bad, either the wrong URL, or the wrong method (Post, Get, Delete, etc).  Basically when you
+        use Javascript, it is a separate "program" from the server, and if the two are trying to talk about the same piece of shared data, but the value
+        of that data is one thing on one side and another thing on the other side, you'll get this issue.  Refreshing the page reconnects and syncs everything.
 
 
 Tousan Notes
