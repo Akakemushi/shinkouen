@@ -28,7 +28,7 @@ export default class extends Controller {
         form.innerHTML = `
           <input type="hidden" name="teapot_id" value="${form.querySelector('input[name="teapot_id"]').value}">
           <input type="hidden" name="cart_item_id" value="${data.cart_item_id}">
-          <input type="submit" value="Remove from Cart" class="small-action-button" data-action="click->remove-from-cart#remove">
+          <input type="submit" value="Remove from Cart" class="stretchy-action-button" data-action="click->remove-from-cart#remove">
         `;
         form.setAttribute("data-controller", "remove-from-cart");
         form.action = `/cart_items/${data.cart_item_id}`; // Update the form action

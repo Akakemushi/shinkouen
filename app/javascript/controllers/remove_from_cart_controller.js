@@ -27,7 +27,7 @@ export default class extends Controller {
       if (data.message === "Teapot removed from your cart.") {
         form.innerHTML = `
           <input type="hidden" name="teapot_id" value="${form.querySelector('input[name="teapot_id"]').value}">
-          <input type="submit" value="Add to Cart" class="small-action-button" data-action="click->add-to-cart#add">
+          <input type="submit" value="Add to Cart" class="stretchy-action-button" data-action="click->add-to-cart#add">
         `;
         form.setAttribute("data-controller", "add-to-cart");
         form.action = `/cart_items`; // Update the form action
