@@ -17,7 +17,12 @@ export default class extends Controller {
         "Accept": "application/json"
       }
     })
-    .then(response => response.json())
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+    })
     .then(data => {
       if (data.message === "Teapot successfully added to your cart.") {
         form.innerHTML = `
@@ -26,6 +31,7 @@ export default class extends Controller {
           <input type="submit" value="Remove from Cart" class="small-action-button" data-action="click->remove-from-cart#remove">
         `;
         form.setAttribute("data-controller", "remove-from-cart");
+        form.action = `/cart_items/${data.cart_item_id}`; // Update the form action
       }
     })
     .catch(error => {

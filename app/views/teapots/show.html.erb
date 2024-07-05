@@ -60,6 +60,7 @@
           <% if current_user.cart && (cart_item = current_user.cart.cart_items.find_by(teapot_id: @teapot.id)) %>
             <%= form_with(url: cart_item_path(cart_item), method: :delete, data: { controller: "remove-from-cart" }) do %>
               <%= hidden_field_tag 'teapot_id', @teapot.id %>
+              <%= hidden_field_tag 'cart_item_id', cart_item.id %>
               <%= submit_tag 'Remove from Cart', class: 'small-action-button', data: { action: "click->remove-from-cart#remove" } %>
             <% end %>
           <% else %>
