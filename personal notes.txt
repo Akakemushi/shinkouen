@@ -82,6 +82,12 @@ FIXED:  Very difficult tbh.  This can happen when the state of the running JavaS
         use Javascript, it is a separate "program" from the server, and if the two are trying to talk about the same piece of shared data, but the value
         of that data is one thing on one side and another thing on the other side, you'll get this issue.  Refreshing the page reconnects and syncs everything.
 
+ISSUE:  The "Sign-Out" button I made on the navbar was not working.  Rails gave an error because I sent a "GET" method request when a "DELETE" was needed.
+FIXED:  The issue stems from Rails being updated to use Turbo instead of something called "Rails UJS", which was a javascript library that somehow integrated
+        Javascript further with Rails.  You usually need to add "method: :delete" into the .erb file in the stimulus, but that doesn't work anymore.
+        The current way uses turbo, and sets the method via a data attribute like this... data: { "turbo-method": :delete }   once I changed that, it worked.
+
+
 
 Tousan Notes
 If priced over, 5man over, show more photos
