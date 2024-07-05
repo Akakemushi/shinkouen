@@ -3,14 +3,16 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   resources :teapots
-  
+
   resources :orders, only: [:show, :create]
   resources :orders, only: [:show, :create] do
     resources :payments, only: :new
   end
 
-  Rails.application.routes.draw do
-    resources :cart_items, only: [:create, :destroy]
+  resources :cart_items, only: [:index, :create, :destroy] do
+    collection do
+      get :total_price
+    end
   end
 
 

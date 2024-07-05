@@ -1,6 +1,10 @@
 class CartItemsController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+    @cart_items = current_user.cart.cart_items.includes(:teapot)
+  end
+
   def create
     @teapot = Teapot.find(params[:teapot_id])
     @cart = current_user.cart
@@ -41,6 +45,22 @@ class CartItemsController < ApplicationController
         format.html { redirect_to teapot_path(params[:teapot_id]), alert: "Teapot not found in your cart." }
         format.json { render json: { message: "Teapot not found in your cart." }, status: :not_found }
       end
+    end
+  end
+
+  def total_price
+    begin
+      if current_user.cart && current_user.cart.cart_items
+        total_price_cents = current_user.cart.cart_items.joins(:teapot).sum('teapots.price_cents')
+        formatted_price = Money.new(total_price_cents, "JPY").format
+        render json: { total_price: formatted_price }
+      else
+        render json: { error: "Cart or cart items not found" }, status: :internal_server_error
+      end
+    rescue => e
+      Rails.logger.error "Error calculating total price: #{e.message}"
+      Rails.logger.error e.backtrace.join("\n")
+      render json: { error: "Error calculating total price" }, status: :internal_server_error
     end
   end
 end

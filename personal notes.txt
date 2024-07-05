@@ -87,6 +87,14 @@ FIXED:  The issue stems from Rails being updated to use Turbo instead of somethi
         Javascript further with Rails.  You usually need to add "method: :delete" into the .erb file in the stimulus, but that doesn't work anymore.
         The current way uses turbo, and sets the method via a data attribute like this... data: { "turbo-method": :delete }   once I changed that, it worked.
 
+ISSUE:  Stimulus controller isn't updating the total price after removing an item from cart.  Get a console error "cart_page_item_remove_controller.js:52
+        Missing target element 'totalPrice' for 'cart-page-item-remove' controller."
+FIXED:  ChatGPT doesn't seem to realize that the element you put the data-controller on has to encapsulate EVERYTHING that it needs in order for the
+        stimulus controller to "see" it.  GPT just put a bunch of controllers everywhere, including controllers within controllers....wtf?  I removed
+        the inner controllers, put the main controller on a surrounding div, and then everything worked.
+
+﻿
+
 
 
 Tousan Notes
