@@ -1,6 +1,6 @@
 <section>
   <div class="container" data-controller="cart-page-item-remove">
-    <h1>Your Cart</h1>
+    <h1 class="section-title">Your Cart</h1>
     <% if @cart_items.any? %>
       <ul class="cart-items-list">
         <% @cart_items.each do |cart_item| %>
@@ -9,9 +9,11 @@
             <div class="item-details">
               <p><%= cart_item.teapot.maker %></p>
               <p>SKU: <%= cart_item.teapot.sku %></p>
+            </div>
+            <div class="item-price">
               <p><%= Money.new(cart_item.teapot.price_cents, "JPY").format %></p>
             </div>
-            <%= form_with(url: cart_item_path(cart_item), data: { "turbo-method": :delete }, data: { action: "click->cart-page-item-remove#remove" }) do |form| %>
+            <%= form_with(url: cart_item_path(cart_item), data: { "turbo-method": :delete }, data: { action: "click->cart-page-item-remove#remove" }, class: "remove-button") do |form| %>
               <%= hidden_field_tag 'teapot_id', cart_item.teapot.id %>
               <%= hidden_field_tag 'cart_item_id', cart_item.id %>
               <%= submit_tag 'Remove', class: 'remove-item-button' %>
@@ -20,7 +22,7 @@
         <% end %>
       </ul>
       <div class="total-price" data-cart-page-item-remove-target="totalPrice">
-        <p>Total Price: <%= Money.new(@cart_items.sum { |item| item.teapot.price_cents }, "JPY").format %></p>
+        <p class="total-price">Total: <%= Money.new(@cart_items.sum { |item| item.teapot.price_cents }, "JPY").format %></p>
       </div>
     <% else %>
       <p>Your cart is empty.</p>
