@@ -57,6 +57,23 @@
           <div class="text-only-info-container">
             <p class="teapot-price-text"><%= @teapot.formatted_price %></p>
           </div>
+          <% if user_signed_in? %>
+            <% if current_user.cart && (cart_item = current_user.cart.cart_items.find_by(teapot_id: @teapot.id)) %>
+              <%= form_with(url: cart_item_path(cart_item), method: :delete, data: { controller: "remove-from-cart" }) do %>
+                <%= hidden_field_tag 'teapot_id', @teapot.id %>
+                <%= hidden_field_tag 'cart_item_id', cart_item.id %>
+                <%= submit_tag 'Remove from Cart', class: 'stretchy-action-button', data: { action: "click->remove-from-cart#remove" } %>
+              <% end %>
+            <% else %>
+              <%= form_with(url: cart_items_path, method: :post, data: { controller: "add-to-cart" }) do %>
+                <%= hidden_field_tag 'teapot_id', @teapot.id %>
+                <%= submit_tag 'Add to Cart', class: 'stretchy-action-button', data: { action: "click->add-to-cart#add" } %>
+              <% end %>
+            <% end %>
+          <% else %>
+            <%= link_to 'Log In', new_user_session_path, class: 'stretchy-action-button' %>
+            <p class="stretchy-button-label">(You must be logged in to make purchases.)</p>
+          <% end %>
         </div>
       </div>
     </div>

@@ -1,7 +1,19 @@
 Rails.application.routes.draw do
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+
   resources :teapots
+
+  resources :orders, only: [:show, :create]
+  resources :orders, only: [:show, :create] do
+    resources :payments, only: :new
+  end
+
+  resources :cart_items, only: [:index, :create, :destroy] do
+    collection do
+      get :total_price
+    end
+  end
 
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

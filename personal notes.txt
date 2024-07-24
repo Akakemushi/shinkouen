@@ -26,6 +26,16 @@ Another thing about this system.  In the schema, you'll see "price_cents", and m
 reference these by doing teapot.price   WITHOUT the _cents.  This is something that the gem is handling.  It returns a money object instead of a
 straight integer.
 
+Stripe Payment System Notes
+First you'll need to create an account that will be linked to the payments.  It needs a name and an email.  From that you'll get .env keys.
+Next get the "stripe" gem and bundle install.       Next put this in the initializer file
+Rails.configuration.stripe = {
+  publishable_key: ENV['STRIPE_PUBLISHABLE_KEY'],
+  secret_key:      ENV['STRIPE_SECRET_KEY']
+}
+
+Stripe.api_key = Rails.configuration.stripe[:secret_key]
+
 picture filename are CaSe SenSiTive!  Even the .suffix!  .PNG does NOT equal .PNG
 
 ==============Q U I C K   L O O K U P S======================
@@ -63,7 +73,28 @@ FIXED:  In Rails 7, it's the one INSIDE the Controllers folder.  Add an "import"
 ISSUE:  Was getting an error in the browser console "TypeError: Failed to resolve module specifier "stimulus". Relative references must start with either "/", "./", or "../".
 FIXED:  Caused by a controller file I made, at the top I had simply "stimulus", but I needed "@hotwired/stimulus"
 
-ISSUE:  
+ISSUE:  Stimulus related action works on page refresh, but not after that. Console gives the message SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+FIXED:  Very difficult tbh.  This can happen when the state of the running JavaScript and the state of the running Ruby on the server don't match.
+        It can happen for a number of reasons.  One is that Javascript is expecting to get a particular data format, either JSON or HTML, but it gets
+        an unexpected data type.  To fix, make sure you handle different kinds of responses from the server appropriately.  Another thing that can happen
+        is that the JavaScript simply isn't updating the page correctly after getting a response from the server. In this case the fix isn't simple. It can
+        also happen if the request made to the server is bad, either the wrong URL, or the wrong method (Post, Get, Delete, etc).  Basically when you
+        use Javascript, it is a separate "program" from the server, and if the two are trying to talk about the same piece of shared data, but the value
+        of that data is one thing on one side and another thing on the other side, you'll get this issue.  Refreshing the page reconnects and syncs everything.
+
+ISSUE:  The "Sign-Out" button I made on the navbar was not working.  Rails gave an error because I sent a "GET" method request when a "DELETE" was needed.
+FIXED:  The issue stems from Rails being updated to use Turbo instead of something called "Rails UJS", which was a javascript library that somehow integrated
+        Javascript further with Rails.  You usually need to add "method: :delete" into the .erb file in the stimulus, but that doesn't work anymore.
+        The current way uses turbo, and sets the method via a data attribute like this... data: { "turbo-method": :delete }   once I changed that, it worked.
+
+ISSUE:  Stimulus controller isn't updating the total price after removing an item from cart.  Get a console error "cart_page_item_remove_controller.js:52
+        Missing target element 'totalPrice' for 'cart-page-item-remove' controller."
+FIXED:  ChatGPT doesn't seem to realize that the element you put the data-controller on has to encapsulate EVERYTHING that it needs in order for the
+        stimulus controller to "see" it.  GPT just put a bunch of controllers everywhere, including controllers within controllers....wtf?  I removed
+        the inner controllers, put the main controller on a surrounding div, and then everything worked.
+
+﻿
+
 
 
 Tousan Notes
@@ -113,3 +144,16 @@ old index html code--------
       <h2 class="paginator"><%= pagy_nav(@pagy).html_safe %></h2>
     </div>
     END OF OLD HTML CODE -----------
+
+    NOTES ABOUT HOW STRIPE WORKS
+    -Stripe uses 2 things, "Products" and "Prices".
+    -When starting out, you seem to need to import you catalog of products into Stripe.  The introduction
+    given doesn't state directly that this is necessary, however it strongly aludes to that being the case.
+    -There is something called a "multi-currency Price" that handles the same product sold in different currencies.
+    -Products created in test mode can be copied over to live mode via the dashboard.  Be aware though that if you later make changes to the test mode
+    version, those changes will NOT be reflected in the Live version.
+
+    Questions for Stripe devs
+    -If I do not create a multi-currency Price and just sell everything in Yen, what happens if someone orders from overseas and tries to pay in dollars?
+    -Is it possible to use Stripe just for payments, and handle the products and shopping cart on my end? Is it possible to use the payment form they have
+    in that case, or do I need to use their catalog system for that?

@@ -1,0 +1,15 @@
+.stretchy-action-button {
+  height: 50px;
+  width: 90%;
+  border-radius: 6px;
+  background-color: $green;
+  font-family: $body-font;
+  font-size: 1.5rem;
+  margin: 12px;
+  transition: ease, 0.2s;
+
+  &:hover {
+    box-shadow: 0 0 10px white;
+    transform: scale(1.1);
+  }
+}
