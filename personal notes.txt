@@ -1,5 +1,11 @@
 Notes for the Shinkoen Website and general learning from the experience.
 
+Ruby has an operator that looks like this...    ||=     ...and it is shorthand for this...   a = a || b   -->  a ||= b
+what it does is check if the first variable, "a", is nil or not.  If it is, it sets the value to b.  However if has already been initialized with some variable,
+then it remains as is.  This is used to avoid recalculating things that don't need to be recalculated. This saves processing time, and is known as "memoizing" or "memoization"
+something I have seen like this before exists on Roll20.  When you create a power with a roll query, any time you repeat that exact same roll query within the same
+roll, instead of rolling again, it just uses the result that was input by the user the first time, since it already has a value for that variable.
+
 Models recommended for setting up an online shop are:
 1. the product model (teapot)
 2. the cart model (temporary storage for items, does not get saved in db)
@@ -35,6 +41,10 @@ Rails.configuration.stripe = {
 }
 
 Stripe.api_key = Rails.configuration.stripe[:secret_key]
+
+Questions for Stripe Devs:
+1. In the Stripe initializer file, do I need to include the line  "Stripe.api_version = '2024-06-20'", and also, do I also need to add something like "embedded_checkout_beta=v2", as shown on the youtube tutorial?
+2.
 
 picture filename are CaSe SenSiTive!  Even the .suffix!  .PNG does NOT equal .PNG
 

@@ -9,6 +9,9 @@ Rails.application.routes.draw do
     resources :payments, only: :new
   end
 
+  resources :checkouts, only: :show
+  resources :payments, only: :show
+
   resources :cart_items, only: [:index, :create, :destroy] do
     collection do
       get :total_price

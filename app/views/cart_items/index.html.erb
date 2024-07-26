@@ -24,6 +24,7 @@
       <div class="total-price" data-cart-page-item-remove-target="totalPrice">
         <p class="total-price">Total: <%= Money.new(@cart_items.sum { |item| item.teapot.price_cents }, "JPY").format %></p>
       </div>
+      <%= link_to "Proceed to Checkout", checkout_path(id: @cart) %>
     <% else %>
       <p>Your cart is empty.</p>
     <% end %>
