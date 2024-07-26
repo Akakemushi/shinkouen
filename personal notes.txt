@@ -103,7 +103,9 @@ FIXED:  ChatGPT doesn't seem to realize that the element you put the data-contro
         stimulus controller to "see" it.  GPT just put a bunch of controllers everywhere, including controllers within controllers....wtf?  I removed
         the inner controllers, put the main controller on a surrounding div, and then everything worked.
 
-﻿
+ISSUE:  Getting a Uncaught (in promise): ReferenceError: Stripe is not defined. error. Something about Stripe not being a stylesheet.
+FIXED:  Check the tags in your <head> area or wherever stripe.js/v3/ is being loaded.  I had it within a stylesheet tag, but this isnt a css file, its javascript
+        changing the html tag from stylesheet to <script> (or the Rails helper equivalent) fixed the issue.
 
 
 
@@ -162,6 +164,24 @@ old index html code--------
     -There is something called a "multi-currency Price" that handles the same product sold in different currencies.
     -Products created in test mode can be copied over to live mode via the dashboard.  Be aware though that if you later make changes to the test mode
     version, those changes will NOT be reflected in the Live version.
+
+    Explanation of the Stripe hash
+
+    @session = Stripe::Checkout::Session.create(
+      line_items: [{                                                              an array of the cart items. Each item in the cart should get its own hash, which includes name, unit amount and quantity.
+        price_data: {                                                             for every teapot, there should be a new hash inside this [array]
+          currency: "jpy",
+          product_data: {
+            name: "yokode_teapot",
+          },
+          unit_amount: 12345
+        },
+        quantity: 1
+      }],
+      mode: "payment",                                                            Note that you DO NOT need to calculate the total on your end. Stripe does that for you, even taking quantity into consideration
+      ui_mode: "embedded",                                                        displaying it to the user.
+      return_url: CGI.unescape(payment_url(session_id: '{CHECKOUT_SESSION_ID}'))
+    )
 
     Questions for Stripe devs
     -If I do not create a multi-currency Price and just sell everything in Yen, what happens if someone orders from overseas and tries to pay in dollars?

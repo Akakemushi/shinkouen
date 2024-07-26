@@ -5,11 +5,21 @@ class CheckoutsController < ApplicationController
         price_data: {
           currency: "jpy",
           product_data: {
-            name: "yokode_teapot"
+            name: "yokode_teapot",
           },
           unit_amount: 12345
         },
         quantity: 1
+      },
+      {
+        price_data: {
+          currency: "jpy",
+          product_data: {
+            name: "underwear",
+          },
+          unit_amount: 1111
+        },
+        quantity: 3
       }],
       mode: "payment",
       ui_mode: "embedded",
@@ -25,4 +35,3 @@ class CheckoutsController < ApplicationController
     @cart ||= Cart.includes(cart_items: { teapot: :images }).find(params[:id])
   end
 end
-
