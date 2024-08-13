@@ -117,7 +117,9 @@ FIXED:  Not exactly.  It was being created, but the way I was trying to search f
         of course it couldn't be found when searched for.
 
 ISSUE:  "in_stock" variable not being updated after using .update!
-FIXED:
+FIXED:  the issue was that I was querying for the teapots to update through the "order_items" join table, however in the creation of the order itself, i
+        neglected to actually create the order_item objects that were associated with it, hence the query returned nil, and you can't modify nil.  It was
+        a bitch to find the problem though.
 
 
 
