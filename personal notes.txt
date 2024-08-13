@@ -107,6 +107,9 @@ ISSUE:  Getting a Uncaught (in promise): ReferenceError: Stripe is not defined. 
 FIXED:  Check the tags in your <head> area or wherever stripe.js/v3/ is being loaded.  I had it within a stylesheet tag, but this isnt a css file, its javascript
         changing the html tag from stylesheet to <script> (or the Rails helper equivalent) fixed the issue.
 
+ISSUE:  This Rails error...   Association named 'cart_items' was not found on Teapot; perhaps you misspelled it?
+FIXED:  
+
 
 
 Tousan Notes
