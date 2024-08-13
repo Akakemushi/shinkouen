@@ -4,10 +4,15 @@ class PaymentsController < ApplicationController
   end
 
   def show
-    @order = Order.find_by(session_id: session.id.to_s, stripe_checkout_id: params[:session_id])
+    @order = Order.find_by(stripe_checkout_id: params[:session_id])
     stripe_session = Stripe::Checkout::Session.retrieve(params[:session_id])
     if stripe_session.status == "complete"
       @order.paid!
+      @order.order_items.each do |order_item|
+        teapot = order_item.teapot.reload
+        teapot.update!(in_stock: false)
+      end
+
       #other business logic, sending emails, etc
     else
       @order.pending!

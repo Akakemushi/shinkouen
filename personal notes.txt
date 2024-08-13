@@ -61,7 +61,7 @@ ISSUE:  Money.new(teapot.price, "JPY").format   seems to return a string, howeve
 FIXED:  Altered the MODEL by adding a method which returns the formated string version of its own price.
 
 ISSUE:  Getting rid of the lame underlines on hyperlinks
-FIXED: You need to set text-decoration: none; on NOT ONLY the tag, but also its variants  a:visited   a:link   a:hover    a:active
+FIXED:  You need to set text-decoration: none; on NOT ONLY the tag, but also its variants  a:visited   a:link   a:hover    a:active
 
 ISSUE:  <p> elements that are children (not even direct children) of a wrapping link are being styled/decorated like links.
 FIXED:  I changed the root design of <a> and <p> tags in the main stylesheet. That seemed to overwrite the problem.
@@ -108,7 +108,16 @@ FIXED:  Check the tags in your <head> area or wherever stripe.js/v3/ is being lo
         changing the html tag from stylesheet to <script> (or the Rails helper equivalent) fixed the issue.
 
 ISSUE:  This Rails error...   Association named 'cart_items' was not found on Teapot; perhaps you misspelled it?
-FIXED:  
+FIXED:  Yes, I indeed misspelled it.  It was supposed to just be "cart_item" because in this case I had a "has one" relationship, not a "has many".  The teapots
+        are each unique, so it doesnt make sense to allow a teapot to be in multiple baskets.
+
+ISSUE:  After filling out the credit card info and clicking pay on the Stripe form, I don't get redirected to a confirmation page, the @order that the controller
+        tries to find comes back nil.  I think it is due to the order never being created in the first place... we'll see.
+FIXED:  Not exactly.  It was being created, but the way I was trying to search for it was through 2 parameters, one of which wasn't even initialized, so
+        of course it couldn't be found when searched for.
+
+ISSUE:  "in_stock" variable not being updated after using .update!
+FIXED:
 
 
 
