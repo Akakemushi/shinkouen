@@ -1,5 +1,6 @@
 class TeapotsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :authorize_teapot, only: [:new, :create, :edit, :update, :destroy]
 
   def index
     teapots = Teapot.where(in_stock: true)
@@ -39,5 +40,15 @@ class TeapotsController < ApplicationController
   def destroy
     @teapot = Teapot.find(params[:id])
     authorize @teapot
+  end
+
+  private
+
+  def authorize_teapot
+    authorize @teapot || Teapot
+  end
+
+  def teapot_params
+    params.require(:teapot).permit(:height, :width, :depth, :weight, :ccs, :comment, :price_cents, :kilntype, :shape, :maker, :views, :in_stock, :sku, images: [])
   end
 end
