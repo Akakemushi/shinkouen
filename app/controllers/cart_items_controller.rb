@@ -2,6 +2,7 @@ class CartItemsController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @cart = current_user.cart
     @cart_items = current_user.cart.cart_items.includes(:teapot)
   end
 

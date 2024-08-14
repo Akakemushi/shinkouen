@@ -1,5 +1,11 @@
 Notes for the Shinkoen Website and general learning from the experience.
 
+Ruby has an operator that looks like this...    ||=     ...and it is shorthand for this...   a = a || b   -->  a ||= b
+what it does is check if the first variable, "a", is nil or not.  If it is, it sets the value to b.  However if has already been initialized with some variable,
+then it remains as is.  This is used to avoid recalculating things that don't need to be recalculated. This saves processing time, and is known as "memoizing" or "memoization"
+something I have seen like this before exists on Roll20.  When you create a power with a roll query, any time you repeat that exact same roll query within the same
+roll, instead of rolling again, it just uses the result that was input by the user the first time, since it already has a value for that variable.
+
 Models recommended for setting up an online shop are:
 1. the product model (teapot)
 2. the cart model (temporary storage for items, does not get saved in db)
@@ -36,6 +42,10 @@ Rails.configuration.stripe = {
 
 Stripe.api_key = Rails.configuration.stripe[:secret_key]
 
+Questions for Stripe Devs:
+1. In the Stripe initializer file, do I need to include the line  "Stripe.api_version = '2024-06-20'", and also, do I also need to add something like "embedded_checkout_beta=v2", as shown on the youtube tutorial?
+2.
+
 picture filename are CaSe SenSiTive!  Even the .suffix!  .PNG does NOT equal .PNG
 
 ==============Q U I C K   L O O K U P S======================
@@ -51,7 +61,7 @@ ISSUE:  Money.new(teapot.price, "JPY").format   seems to return a string, howeve
 FIXED:  Altered the MODEL by adding a method which returns the formated string version of its own price.
 
 ISSUE:  Getting rid of the lame underlines on hyperlinks
-FIXED: You need to set text-decoration: none; on NOT ONLY the tag, but also its variants  a:visited   a:link   a:hover    a:active
+FIXED:  You need to set text-decoration: none; on NOT ONLY the tag, but also its variants  a:visited   a:link   a:hover    a:active
 
 ISSUE:  <p> elements that are children (not even direct children) of a wrapping link are being styled/decorated like links.
 FIXED:  I changed the root design of <a> and <p> tags in the main stylesheet. That seemed to overwrite the problem.
@@ -93,7 +103,23 @@ FIXED:  ChatGPT doesn't seem to realize that the element you put the data-contro
         stimulus controller to "see" it.  GPT just put a bunch of controllers everywhere, including controllers within controllers....wtf?  I removed
         the inner controllers, put the main controller on a surrounding div, and then everything worked.
 
-﻿
+ISSUE:  Getting a Uncaught (in promise): ReferenceError: Stripe is not defined. error. Something about Stripe not being a stylesheet.
+FIXED:  Check the tags in your <head> area or wherever stripe.js/v3/ is being loaded.  I had it within a stylesheet tag, but this isnt a css file, its javascript
+        changing the html tag from stylesheet to <script> (or the Rails helper equivalent) fixed the issue.
+
+ISSUE:  This Rails error...   Association named 'cart_items' was not found on Teapot; perhaps you misspelled it?
+FIXED:  Yes, I indeed misspelled it.  It was supposed to just be "cart_item" because in this case I had a "has one" relationship, not a "has many".  The teapots
+        are each unique, so it doesnt make sense to allow a teapot to be in multiple baskets.
+
+ISSUE:  After filling out the credit card info and clicking pay on the Stripe form, I don't get redirected to a confirmation page, the @order that the controller
+        tries to find comes back nil.  I think it is due to the order never being created in the first place... we'll see.
+FIXED:  Not exactly.  It was being created, but the way I was trying to search for it was through 2 parameters, one of which wasn't even initialized, so
+        of course it couldn't be found when searched for.
+
+ISSUE:  "in_stock" variable not being updated after using .update!
+FIXED:  the issue was that I was querying for the teapots to update through the "order_items" join table, however in the creation of the order itself, i
+        neglected to actually create the order_item objects that were associated with it, hence the query returned nil, and you can't modify nil.  It was
+        a bitch to find the problem though.
 
 
 
@@ -152,6 +178,24 @@ old index html code--------
     -There is something called a "multi-currency Price" that handles the same product sold in different currencies.
     -Products created in test mode can be copied over to live mode via the dashboard.  Be aware though that if you later make changes to the test mode
     version, those changes will NOT be reflected in the Live version.
+
+    Explanation of the Stripe hash
+
+    @session = Stripe::Checkout::Session.create(
+      line_items: [{                                                              an array of the cart items. Each item in the cart should get its own hash, which includes name, unit amount and quantity.
+        price_data: {                                                             for every teapot, there should be a new hash inside this [array]
+          currency: "jpy",
+          product_data: {
+            name: "yokode_teapot",
+          },
+          unit_amount: 12345
+        },
+        quantity: 1
+      }],
+      mode: "payment",                                                            Note that you DO NOT need to calculate the total on your end. Stripe does that for you, even taking quantity into consideration
+      ui_mode: "embedded",                                                        displaying it to the user.
+      return_url: CGI.unescape(payment_url(session_id: '{CHECKOUT_SESSION_ID}'))
+    )
 
     Questions for Stripe devs
     -If I do not create a multi-currency Price and just sell everything in Yen, what happens if someone orders from overseas and tries to pay in dollars?

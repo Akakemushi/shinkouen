@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_21_081202) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_24_222039) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -68,13 +68,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_21_081202) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.string "state"
     t.string "teapot_sku"
-    t.string "checkout_session_id"
     t.integer "amount_cents", default: 0, null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "session_id"
+    t.string "stripe_checkout_id"
+    t.integer "status", default: 0
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -105,6 +106,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_21_081202) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "admin", default: false
+    t.string "stripe_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
