@@ -49,6 +49,17 @@ class TeapotsController < ApplicationController
   def destroy
     @teapot = Teapot.find(params[:id])
     authorize @teapot
+
+    if @teapot.destroy
+      flash[:notice] = 'Teapot was successfully deleted.'
+    else
+      flash[:alert] = 'There was an error deleting the teapot.'
+    end
+
+    respond_to do |format|
+      format.html { redirect_to teapots_path }
+      format.json { head :no_content }
+    end
   end
 
   private
