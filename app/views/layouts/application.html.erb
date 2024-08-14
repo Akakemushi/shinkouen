@@ -52,8 +52,9 @@
     </div>
     <div class="medium-white-line"></div>
     <div class="thin-white-line"></div>
+    <% flash.each do |type, message| %>
+      <div class="flash <%= type %>"><%= message %></div>
+    <% end %>
     <%= yield %>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
   </body>
 </html>

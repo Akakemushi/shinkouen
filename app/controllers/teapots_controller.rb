@@ -31,6 +31,7 @@ class TeapotsController < ApplicationController
       redirect_to new_teapot_path
     else
       flash.now[:alert] = 'There was an error creating the teapot. Please check the form for errors.'
+      Rails.logger.debug "Flash alert set: #{flash.now[:alert]}"
       render :new
     end
   end

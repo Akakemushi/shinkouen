@@ -1,21 +1,21 @@
 <section>
   <div class="container">
     <h1 class="section-title">New Teapot</h1>
-    <%= simple_form_for @teapot, html: { multipart: true } do |f| %>
+    <%= simple_form_for @teapot, html: { multipart: true, data: { turbo: false } } do |f| %>
       <%= f.error_notification %>
 
       <div class="form-inputs">
-        <%= f.input :height, required: true, input_html: { min: 0, step: 1, type: 'number' } %>
-        <%= f.input :width, required: true, input_html: { min: 0, step: 1, type: 'number' } %>
-        <%= f.input :depth, required: true, input_html: { min: 0, step: 1, type: 'number' } %>
-        <%= f.input :weight, required: true, input_html: { min: 0, step: 1, type: 'number' } %>
-        <%= f.input :ccs, required: true, input_html: { min: 0, step: 1, type: 'number' } %>
+        <%= f.input :height, input_html: { min: 0, step: 1, type: 'number' } %>
+        <%= f.input :width, input_html: { min: 0, step: 1, type: 'number' } %>
+        <%= f.input :depth, input_html: { min: 0, step: 1, type: 'number' } %>
+        <%= f.input :weight, input_html: { min: 0, step: 1, type: 'number' } %>
+        <%= f.input :ccs, input_html: { min: 0, step: 1, type: 'number' } %>
         <%= f.input :comment, as: :text %>
-        <%= f.input :price_cents, required: true, input_html: { min: 0, step: 1, type: 'number' } %>
-        <%= f.input :kilntype, required: true %>
-        <%= f.input :shape, required: true %>
-        <%= f.input :maker, required: true %>
-        <%= f.input :sku, required: true %>
+        <%= f.input :price_cents, input_html: { min: 0, step: 1, type: 'number' } %>
+        <%= f.input :kilntype %>
+        <%= f.input :shape %>
+        <%= f.input :maker %>
+        <%= f.input :sku %>
 
         <%= f.input :images, as: :file, input_html: { multiple: true } %>
       </div>

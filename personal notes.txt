@@ -121,6 +121,11 @@ FIXED:  the issue was that I was querying for the teapots to update through the 
         neglected to actually create the order_item objects that were associated with it, hence the query returned nil, and you can't modify nil.  It was
         a bitch to find the problem though.
 
+ISSUE:  Flash notices and alerts aren't working.
+FIXED:  I was half-right.  The flashes were working for successes, but not failures.  A few notes here.  First, flashes need to be enabled in the main
+        application.html.erb, somewhere in the <body>, outside of the yield.  Second, Turbo Forms and Flash errors do not play nice together.  If you
+        want flash errors to pop up when some form submission goes wrong, you need to disable Turbo on the form you're submitting.
+
 
 
 Tousan Notes
