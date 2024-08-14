@@ -25,6 +25,14 @@ class TeapotsController < ApplicationController
   def create
     @teapot = Teapot.new(teapot_params)
     authorize @teapot
+
+    if @teapot.save
+      flash[:notice] = 'Teapot was successfully created.'
+      redirect_to new_teapot_path
+    else
+      flash.now[:alert] = 'There was an error creating the teapot. Please check the form for errors.'
+      render :new
+    end
   end
 
   def edit
