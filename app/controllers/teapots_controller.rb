@@ -15,6 +15,7 @@ class TeapotsController < ApplicationController
 
   def show
     @teapot = Teapot.find(params[:id])
+    @teapot.increment!(:views)
   end
 
   def new
