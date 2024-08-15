@@ -126,6 +126,21 @@ FIXED:  I was half-right.  The flashes were working for successes, but not failu
         application.html.erb, somewhere in the <body>, outside of the yield.  Second, Turbo Forms and Flash errors do not play nice together.  If you
         want flash errors to pop up when some form submission goes wrong, you need to disable Turbo on the form you're submitting.
 
+ISSUE:  Javascript-controlled dialogue box for teapot deletion displays that there was a problem, even though there was no problem and it got
+        properly deleted.
+FIXED:  Really hard one.  Issue stemmed from a redirect that was happening on success which is a status code in the 300 range, not 200... which
+        apparently confuses the "fetch()" method in JavaScript.  The fix was by adding a few lines in the JS code to account for redirects when they
+        occur, such as the line     redirect: 'follow'     in the header info sent by the fetch request, and also the "if" branch   if (response.redirected) {
+        // If the response was redirected, navigate to the new URL
+        window.location.href = response.url;
+        for your reference (and as far as I can tell) the fetch method seems to be a way for JavaScript code to make http requests using the keywords
+        POST, GET, DELETE, UPDATE, etc. and it's followed by a .then  block to handle and parse the response from the server.  The server (should?)
+        send back some info which the fetch method wraps in a "Response" object.  You have to parse that object using the appropriate format, such as
+        .text()  .json()   .blob()   These things weren't directly related to the problem, but are important for future builds.
+
+ISSUE:  
+
+
 
 
 Tousan Notes
