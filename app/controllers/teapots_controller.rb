@@ -44,6 +44,33 @@ class TeapotsController < ApplicationController
   def update
     @teapot = Teapot.find(params[:id])
     authorize @teapot
+
+    # Handle removal of selected images
+    if params[:teapot][:remove_images].present?
+      params[:teapot][:remove_images].each do |signed_id|
+        attachment = @teapot.images.attachments.find { |att| att.signed_id == signed_id }
+        if attachment
+          Rails.logger.debug "Purging image with signed_id: #{signed_id}"
+          attachment.purge
+        else
+          Rails.logger.debug "No image found with signed_id: #{signed_id}"
+        end
+      end
+    end
+
+    # Update the teapot with other attributes (excluding images)
+    if @teapot.update(teapot_params.except(:images))
+      # Attach new images if any
+      if params[:teapot][:images].present?
+        @teapot.images.attach(params[:teapot][:images])
+      end
+
+      flash[:notice] = 'Teapot was successfully updated.'
+      redirect_to teapot_path(@teapot)
+    else
+      flash.now[:alert] = 'There was an error updating the teapot.'
+      render :edit
+    end
   end
 
   def destroy

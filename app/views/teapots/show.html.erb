@@ -74,9 +74,10 @@
             <%= link_to 'Log In', new_user_session_path, class: 'stretchy-action-button' %>
             <p class="stretchy-button-label">(You must be logged in to make purchases.)</p>
           <% end %>
-            <% if user_signed_in? && current_user.admin? %>
-              <%= button_tag 'Delete Teapot', type: 'button', class: 'stretchy-action-button delete-button', data: { controller: 'delete', action: 'click->delete#confirm', delete_teapot_id_value: @teapot.id } %>
-            <% end %>
+          <% if user_signed_in? && current_user.admin? %>
+            <%= link_to 'Edit Details', edit_teapot_path(@teapot), type: 'button', class: 'stretchy-action-button edit-button' %>
+            <%= button_tag 'Delete Teapot', type: 'button', class: 'stretchy-action-button delete-button', data: { controller: 'delete', action: 'click->delete#confirm', delete_teapot_id_value: @teapot.id } %>
+          <% end %>
         </div>
       </div>
     </div>

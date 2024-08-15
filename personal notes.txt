@@ -138,7 +138,10 @@ FIXED:  Really hard one.  Issue stemmed from a redirect that was happening on su
         send back some info which the fetch method wraps in a "Response" object.  You have to parse that object using the appropriate format, such as
         .text()  .json()   .blob()   These things weren't directly related to the problem, but are important for future builds.
 
-ISSUE:  
+ISSUE:  Can't find a way to remove just one or a few cloudinary images from a teapot entry (editing functionality).  I can delete ALL of them, but not just a few.
+FIXED:  The issue wasn't that I couldn't remove only a few of the images, the issue was that after the images were removed, there was a BLANK list of images
+        to attach to the teapot, which overwrote the ones that were still there.  So the issue was with overwriting existing images with nothing.  Having the
+        line...    if @teapot.update(teapot_params.except(:images))     ... was the key, specifically that   .except(:images) part.
 
 
 
