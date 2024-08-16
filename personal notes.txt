@@ -144,6 +144,20 @@ FIXED:  The issue wasn't that I couldn't remove only a few of the images, the is
         line...    if @teapot.update(teapot_params.except(:images))     ... was the key, specifically that   .except(:images) part.
 
 
+TODO list
+Add serch bar on index page
+Add admin page for viewing SOLD teapots
+Style the Login page
+Style the New Teapot page
+Style the Edit Teapot page
+Style the flash notices to make them just be a card that is temporarily on screen.
+Make the teapots on the index page (not the carosel ones) behave in a predictable way.
+Fix the style of the Edit Teapot link button on the show page
+Go over creation and edit forms and see if any fields need to be kept/removed.
+
+Maybe TODO list
+add an "about us" page?  What should that look like?  What should be on it?
+something to do with shipping info?
 
 
 Tousan Notes

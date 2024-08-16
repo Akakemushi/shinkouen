@@ -4,12 +4,29 @@ class TeapotsController < ApplicationController
 
   def index
     teapots = Teapot.where(in_stock: true)
-    @most_popular = teapots.sort_by { |teapot| teapot.views }.reverse.take(6)
 
-    if params[:q].present?
-      teapots = Teapot.search(params[:q])
+    @makers = Teapot.distinct.pluck(:maker)
+    @styles = Teapot.distinct.pluck(:shape)
+    @materials = Teapot.distinct.pluck(:kilntype)
+
+    if params[:search_by].present?
+      case params[:search_by]
+      when 'price'
+        condition = params[:price_condition] == 'less_than' ? '<=' : '>='
+        teapots = teapots.where("price_cents #{condition} ?", params[:price].to_i)
+      when 'maker'
+        teapots = teapots.where(maker: params[:maker])
+      when 'style'
+        teapots = teapots.where(shape: params[:style])
+      when 'material'
+        teapots = teapots.where(kilntype: params[:material])
+      when 'capacity'
+        condition = params[:capacity_condition] == 'less_than' ? '<=' : '>='
+        teapots = teapots.where("ccs #{condition} ?", params[:capacity].to_i)
+      end
     end
 
+    @most_popular = teapots.sort_by { |teapot| teapot.views }.reverse.take(6)
     @pagy, @teapots = pagy(teapots, items: 24)
   end
 
