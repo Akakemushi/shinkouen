@@ -3,31 +3,39 @@ class TeapotsController < ApplicationController
   before_action :authorize_teapot, only: [:new, :create, :edit, :update, :destroy]
 
   def index
-    teapots = Teapot.where(in_stock: true)
+    teapots_scope = Teapot.where(in_stock: true)
 
-    @makers = Teapot.distinct.pluck(:maker)
-    @styles = Teapot.distinct.pluck(:shape)
-    @materials = Teapot.distinct.pluck(:kilntype)
+    @makers = teapots_scope.distinct.pluck(:maker)
+    @styles = teapots_scope.distinct.pluck(:shape)
+    @materials = teapots_scope.distinct.pluck(:kilntype)
 
+    # Sort the teapots based on the search criteria
     if params[:search_by].present?
       case params[:search_by]
       when 'price'
         condition = params[:price_condition] == 'less_than' ? '<=' : '>='
-        teapots = teapots.where("price_cents #{condition} ?", params[:price].to_i)
+        teapots_scope = teapots_scope.where("price_cents #{condition} ?", params[:price].to_i)
       when 'maker'
-        teapots = teapots.where(maker: params[:maker])
+        teapots_scope = teapots_scope.where(maker: params[:maker])
       when 'style'
-        teapots = teapots.where(shape: params[:style])
+        teapots_scope = teapots_scope.where(shape: params[:style])
       when 'material'
-        teapots = teapots.where(kilntype: params[:material])
+        teapots_scope = teapots_scope.where(kilntype: params[:material])
       when 'capacity'
         condition = params[:capacity_condition] == 'less_than' ? '<=' : '>='
-        teapots = teapots.where("ccs #{condition} ?", params[:capacity].to_i)
+        teapots_scope = teapots_scope.where("ccs #{condition} ?", params[:capacity].to_i)
       end
     end
 
-    @most_popular = teapots.sort_by { |teapot| teapot.views }.reverse.take(6)
-    @pagy, @teapots = pagy(teapots, items: 24)
+    # Order the teapots by price in ascending order for the main display
+    @pagy, @teapots = pagy(teapots_scope.order(price_cents: :asc), items: 24)
+
+    # Get the top 6 most popular teapots based on views for the carousel
+    @most_popular = Teapot.where(in_stock: true).order(views: :desc).limit(6)
+  end
+
+  def sold_index
+    @pagy, @sold_teapots = pagy(Teapot.where(in_stock: false).order(created_at: :desc), items: 24)
   end
 
   def show
@@ -115,5 +123,9 @@ class TeapotsController < ApplicationController
 
   def teapot_params
     params.require(:teapot).permit(:height, :width, :depth, :weight, :ccs, :comment, :price_cents, :kilntype, :shape, :maker, :views, :in_stock, :sku, images: [])
+  end
+
+  def authorize_admin
+    redirect_to root_path, alert: "Not authorized." unless current_user.admin?
   end
 end

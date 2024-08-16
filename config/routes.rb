@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
+  get 'admin/sold_teapots', to: 'teapots#sold_index', as: 'sold_teapots'
   resources :teapots
-
   resources :orders, only: [:show, :create]
   resources :orders, only: [:show, :create] do
     resources :payments, only: :new

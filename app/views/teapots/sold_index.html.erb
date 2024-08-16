@@ -1,0 +1,23 @@
+<section>
+  <div class="container">
+    <h1 class="section-title">Sold Teapots</h1>
+    <div class="all-teapots-container">
+      <% @sold_teapots.each_with_index do |teapot, teapot_index| %>
+        <%= link_to teapot_path(teapot), class: "teapot-link" do %>
+          <div class="teapot-card-simple">
+            <div class="sold-image-container">
+              <% if teapot.images.attached? %>
+                <%= cl_image_tag(teapot.images.first.key, alt: "Teapot Image", class: "teapot-image", width: 300, height: 300, crop: :fill) %>
+              <% end %>
+            </div>
+            <div class="card-info-container">
+              <p class="teapot-price-text"><%= humanized_money_with_symbol(teapot.price) %></p>
+              <p class="teapot-maker-text"><strong><%= teapot.maker %></strong></p>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <h2 class="paginator"><%= pagy_nav(@pagy).html_safe %></h2>
+  </div>
+</section>

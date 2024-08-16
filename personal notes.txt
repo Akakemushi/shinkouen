@@ -143,15 +143,22 @@ FIXED:  The issue wasn't that I couldn't remove only a few of the images, the is
         to attach to the teapot, which overwrote the ones that were still there.  So the issue was with overwriting existing images with nothing.  Having the
         line...    if @teapot.update(teapot_params.except(:images))     ... was the key, specifically that   .except(:images) part.
 
+ISSUE:  Data values from HTML not being passed to the this.data.get() method in a Javascript controller.  No matter what I try, it keeps resolving to
+        either null or a blank array.
+FIXED:  OMG Such a hard nut to crack!!  Again, more Stimulus problems... this time the issue was partly my fault for being lazy, and partly ChatGPTs fault
+        for giving me crap code.  If I had just looked up the tutorials on Kitt, I could have avoided this... ANYWAY!  The fucking fix was to NOT use
+        this.data.get() in the first place!!  More recent versions of stimulus have that "static values" thing at the top, which I totally did not use,
+        and instead spent about 3 to 4 hours banging my head against a wall to figure it out... Ugh.  Once I put GPT on the right path it came up with
+        the code EASILY.  Jesus, what a waste of time.
+
 
 TODO list
-Add serch bar on index page
 Add admin page for viewing SOLD teapots
 Style the Login page
 Style the New Teapot page
 Style the Edit Teapot page
+Style the Search Bar
 Style the flash notices to make them just be a card that is temporarily on screen.
-Make the teapots on the index page (not the carosel ones) behave in a predictable way.
 Fix the style of the Edit Teapot link button on the show page
 Go over creation and edit forms and see if any fields need to be kept/removed.
 
