@@ -153,7 +153,6 @@ FIXED:  OMG Such a hard nut to crack!!  Again, more Stimulus problems... this ti
 
 
 TODO list
-Add admin page for viewing SOLD teapots
 Style the Login page
 Style the New Teapot page
 Style the Edit Teapot page
@@ -165,6 +164,7 @@ Go over creation and edit forms and see if any fields need to be kept/removed.
 Maybe TODO list
 add an "about us" page?  What should that look like?  What should be on it?
 something to do with shipping info?
+Hyper links to extra static pages that explain certain teapot concepts? Like how certain types are fired, the clay, etc...
 
 
 Tousan Notes
