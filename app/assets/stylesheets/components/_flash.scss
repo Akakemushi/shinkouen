@@ -3,11 +3,11 @@
   margin: 10px 0;
   border-radius: 5px;
   position: absolute;
-  top: -100px; /* Start off-screen */
-  left: 15px;
+  bottom: -100px; /* Start off-screen */
+  right: 15px;
   z-index: 1000;
   opacity: 0; /* Start invisible */
-  animation: flashSlideDown 0.5s forwards, flashStay 5s 0.5s forwards, flashSlideUp 0.5s 5.5s forwards;
+  animation: flashSlideUp 0.5s forwards, flashStay 5s 0.5s forwards, flashSlideDown 0.5s 5.5s forwards;
 }
 
 .flash.notice {
@@ -20,33 +20,33 @@
   color: #800808;
 }
 
-@keyframes flashSlideDown {
+@keyframes flashSlideUp {
   from {
-    top: -100px;
+    bottom: -100px;
     opacity: 0;
   }
   to {
-    top: 15px;
+    bottom: 15px;
     opacity: 1;
   }
 }
 
 @keyframes flashStay {
   from {
-    top: 15px;
+    bottom: 15px;
   }
   to {
-    top: 15px;
+    bottom: 15px;
   }
 }
 
-@keyframes flashSlideUp {
+@keyframes flashSlideDown {
   from {
-    top: 15px;
+    bottom: 15px;
     opacity: 1;
   }
   to {
-    top: -100px;
+    bottom: -100px;
     opacity: 0;
   }
 }
