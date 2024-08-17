@@ -55,9 +55,11 @@
     </div>
     <div class="medium-white-line"></div>
     <div class="thin-white-line"></div>
-    <% flash.each do |type, message| %>
-      <div class="flash <%= type %>"><%= message %></div>
-    <% end %>
+    <div class="flash-container">
+      <% flash.each do |type, message| %>
+        <div class="flash <%= type %>"><%= message %></div>
+      <% end %>
+    </div>
     <%= yield %>
   </body>
 </html>
