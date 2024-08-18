@@ -1,0 +1,31 @@
+.login-form-inputs {
+  width: 270px;
+
+  div {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .login-button {
+      height: 25px;
+      border-radius: 5px;
+      background-color: $green;
+    }
+  }
+  label {
+    color: $light;
+  }
+
+  .login-links {
+    a {
+      display: block;
+      text-decoration: none; /* Example style */
+    }
+
+    a:hover {
+      text-decoration: underline; /* Example hover effect */
+    }
+  }
+}
