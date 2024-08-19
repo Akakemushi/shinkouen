@@ -153,7 +153,6 @@ FIXED:  OMG Such a hard nut to crack!!  Again, more Stimulus problems... this ti
 
 
 TODO list
-Style the Login page
 Style the New Teapot page
 Style the Edit Teapot page
 Style the Search Bar
