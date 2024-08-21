@@ -1,0 +1,46 @@
+.edit-form {
+
+  h1 {
+    margin: 0;
+    font-family: $body-font;
+    font-size: 2em;
+    margin-bottom: 8px;
+  }
+  color: $light;
+  display: flex;
+  margin-top: 20px;
+  justify-content: space-around;
+
+  .text-inputs {
+    flex-direction: column;
+    margin-right: 16px;
+
+    div {
+      width: 285px;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+
+      label {
+        font-size: 1.2em;
+      }
+    }
+
+  }
+
+  .current-images-block {
+
+    .current-images {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .form-submit {
+      display: flex;
+      justify-content: right;
+      flex-shrink: 1;
+    }
+  }
+}

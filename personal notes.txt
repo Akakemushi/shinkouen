@@ -159,8 +159,6 @@ FIXED:  Here's how you add a class.  First of all, note that when you use f.inpu
 TODO list
 Style the New Teapot page
 Style the Edit Teapot page
-Style the Search Bar
-Fix the style of the Edit Teapot link button on the show page
 Go over creation and edit forms and see if any fields need to be kept/removed.
 
 Maybe TODO list
