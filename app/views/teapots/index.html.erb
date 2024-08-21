@@ -40,22 +40,24 @@
   </div>
   <div class="container">
     <h1 class="section-title">Collection</h1>
-    <%= form_with url: teapots_path, method: :get, local: true, class: "search-form", data: { controller: "search", search_makers_value: @makers.to_json, search_styles_value: @styles.to_json, search_materials_value: @materials.to_json } do |f| %>
-      <div class="search-by-options">
-        <label>Search by:</label>
-        <%= f.radio_button :search_by, 'price', checked: true, data: { action: "input->search#updateForm" } %> Price
-        <%= f.radio_button :search_by, 'maker', data: { action: "input->search#updateForm" } %> Maker
-        <%= f.radio_button :search_by, 'style', data: { action: "input->search#updateForm" } %> Style
-        <%= f.radio_button :search_by, 'material', data: { action: "input->search#updateForm" } %> Material
-        <%= f.radio_button :search_by, 'capacity', data: { action: "input->search#updateForm" } %> Capacity
-      </div>
-
-      <div id="search-input-container" data-search-target="inputContainer">
-        <!-- This will be dynamically updated by JavaScript based on the selected search_by option -->
-      </div>
-
-      <%= f.submit "Search", class: "search-button" %>
-    <% end %>
+    <div style="display: flex; justify-content: center">
+      <%= form_with url: teapots_path, method: :get, local: true, class: "search-form", data: { controller: "search", search_makers_value: @makers.to_json, search_styles_value: @styles.to_json, search_materials_value: @materials.to_json } do |f| %>
+        <div class="search-by-options">
+          <label>Search by:</label>
+          <%= f.radio_button :search_by, 'price', checked: true, data: { action: "input->search#updateForm" } %> Price
+          <%= f.radio_button :search_by, 'maker', data: { action: "input->search#updateForm" } %> Maker
+          <%= f.radio_button :search_by, 'style', data: { action: "input->search#updateForm" } %> Style
+          <%= f.radio_button :search_by, 'material', data: { action: "input->search#updateForm" } %> Material
+          <%= f.radio_button :search_by, 'capacity', data: { action: "input->search#updateForm" } %> Capacity
+        </div>
+        <div class="search-by-dropdowns">
+          <div id="search-input-container" data-search-target="inputContainer">
+            <!-- This will be dynamically updated by JavaScript based on the selected search_by option -->
+          </div>
+          <%= f.submit "Search", class: "action-button" %>
+        </div>
+      <% end %>
+    </div>
     <div class="all-teapots-container">
       <% @teapots.each_with_index do |teapot, teapot_index| %>
         <%= link_to teapot_path(teapot), class: "teapot-link" do %>
