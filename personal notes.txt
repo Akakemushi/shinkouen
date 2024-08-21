@@ -150,6 +150,10 @@ FIXED:  OMG Such a hard nut to crack!!  Again, more Stimulus problems... this ti
         this.data.get() in the first place!!  More recent versions of stimulus have that "static values" thing at the top, which I totally did not use,
         and instead spent about 3 to 4 hours banging my head against a wall to figure it out... Ugh.  Once I put GPT on the right path it came up with
         the code EASILY.  Jesus, what a waste of time.
+ISSUE:  I can't figure out how to add classes to those stupid Simple Forms in .erb... so annoying.
+FIXED:  Here's how you add a class.  First of all, note that when you use f.input, it generates a DIV automatically.  So double check to make sure if it's
+        that wrapper div or something else that you want to add a class to.  For the wrapper div, add this line into the simple-form stuff...
+        wrapper_html: { class: "your-class-here" }       and then maybe a comma after that line if more follows.
 
 
 TODO list
