@@ -1,10 +1,10 @@
 <section>
   <div class="container">
     <h1 class="section-title">New Teapot</h1>
-    <%= simple_form_for @teapot, html: { multipart: true, data: { turbo: false } } do |f| %>
+    <%= simple_form_for @teapot, html: { multipart: true, data: { turbo: false }, class: "new-teapot-form"} do |f| %>
       <%= f.error_notification %>
-
-      <div class="form-inputs">
+      <div class="text-inputs">
+        <h1>Enter Info</h1>
         <%= f.input :height, input_html: { min: 0, step: 1, type: 'number' } %>
         <%= f.input :width, input_html: { min: 0, step: 1, type: 'number' } %>
         <%= f.input :depth, input_html: { min: 0, step: 1, type: 'number' } %>
@@ -16,12 +16,10 @@
         <%= f.input :shape %>
         <%= f.input :maker %>
         <%= f.input :sku %>
-
         <%= f.input :images, as: :file, input_html: { multiple: true } %>
-      </div>
-
-      <div class="form-actions">
-        <%= f.button :submit, "Create Teapot" %>
+        <div class="form-submit">
+          <%= f.button :submit, "Create Teapot", class: "action-button" %>
+        </div>
       </div>
     <% end %>
   </div>

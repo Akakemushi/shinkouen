@@ -1,0 +1,54 @@
+.new-teapot-form {
+
+  h1 {
+    margin: 0;
+    font-family: $body-font;
+    font-size: 2em;
+    margin-bottom: 8px;
+  }
+  color: $light;
+  display: flex;
+  margin-top: 20px;
+  justify-content: left;
+
+  .text-inputs {
+    flex-direction: column;
+    margin-right: 16px;
+
+    div {
+      width: 425px;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+
+      input {
+        width: 300px;
+      }
+
+      textarea {
+        width: 300px;
+      }
+
+      label {
+        font-size: 1.2em;
+      }
+    }
+
+    .form-submit {
+      display: flex;
+      justify-content: right;
+      margin-top: 16px;
+
+      input {
+        width: 100px;
+      }
+    }
+  }
+
+  .form-submit {
+    display: flex;
+    justify-content: right;
+    flex-shrink: 1;
+  }
+
+}
