@@ -5,6 +5,7 @@ import RemoveFromCartController from "./remove_from_cart_controller.js"
 import CartPageItemRemoveController from "./cart_page_item_remove_controller.js"
 import StripeController from "./stripe_controller.js"
 import DeleteController from "./delete_controller.js"
+import SearchController from "./search_controller.js"
 
 const application = Application.start();
 
@@ -16,6 +17,7 @@ Stimulus.register("remove-from-cart", RemoveFromCartController);
 Stimulus.register("cart-page-item-remove", CartPageItemRemoveController);
 Stimulus.register("stripe", StripeController);
 Stimulus.register("delete", DeleteController);
+Stimulus.register("search", SearchController);
 
 
 export { application };

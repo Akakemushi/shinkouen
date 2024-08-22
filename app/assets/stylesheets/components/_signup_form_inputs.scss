@@ -1,0 +1,42 @@
+.signup-form-inputs {
+  width: 275px;
+
+  div {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .login-button {
+      height: 25px;
+      border-radius: 5px;
+      background-color: $green;
+    }
+  }
+  label {
+    color: $light;
+  }
+
+  .password-div {
+      margin: 0px;
+  }
+
+  .password-hint {
+    margin-top: 0px;
+
+    p {
+      margin: 0px;
+    }
+  }
+  .login-links {
+    a {
+      display: block;
+      text-decoration: none; /* Example style */
+    }
+
+    a:hover {
+      text-decoration: underline; /* Example hover effect */
+    }
+  }
+}

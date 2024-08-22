@@ -1,0 +1,12 @@
+.search-form {
+  color: $light;
+
+  label {
+    font-size: 1.5em;
+  }
+
+  .search-by-dropdowns {
+    display: flex;
+    justify-content: space-between;
+  }
+}

@@ -2,7 +2,12 @@
   padding: 10px;
   margin: 10px 0;
   border-radius: 5px;
-
+  position: absolute;
+  bottom: -100px; /* Start off-screen */
+  right: 15px;
+  z-index: 1000;
+  opacity: 0; /* Start invisible */
+  animation: flashSlideUp 0.5s forwards, flashStay 5s 0.5s forwards, flashSlideDown 0.5s 5.5s forwards;
 }
 
 .flash.notice {
@@ -13,4 +18,35 @@
 .flash.alert {
   background-color: #ffe6e6;
   color: #800808;
+}
+
+@keyframes flashSlideUp {
+  from {
+    bottom: -100px;
+    opacity: 0;
+  }
+  to {
+    bottom: 15px;
+    opacity: 1;
+  }
+}
+
+@keyframes flashStay {
+  from {
+    bottom: 15px;
+  }
+  to {
+    bottom: 15px;
+  }
+}
+
+@keyframes flashSlideDown {
+  from {
+    bottom: 15px;
+    opacity: 1;
+  }
+  to {
+    bottom: -100px;
+    opacity: 0;
+  }
 }
